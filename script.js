@@ -104,8 +104,8 @@ let currentQuestion = 0;
 let answers = {};
 let sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
-// Google Sheets Web App URL - NAHRAĎTE svojou URL z Google Apps Script
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+// Google Sheets Web App URL
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzNFLwSvkF2CBBGzdvuLqtixygDHmuNFwetbmXxKTwHUVGnookjOuBV1hlClJbQE_Up/exec';
 
 // Initialize the survey
 function initSurvey() {
