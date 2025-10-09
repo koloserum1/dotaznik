@@ -496,12 +496,22 @@ function updateProgress() {
     
     // Total questions excluding intro
     const totalQuestions = questions.filter(q => q.type !== 'intro').length;
-    const progress = (answeredCount / totalQuestions) * 100;
     
-    document.getElementById('progressFill').style.width = `${progress}%`;
+    // Progress based on current question position (not answered questions)
+    let progressPercentage;
+    let currentQuestionNum;
     
-    // Adjust question counter to not include intro
-    const currentQuestionNum = questions[currentQuestion].type === 'intro' ? 0 : currentQuestion;
+    if (questions[currentQuestion].type === 'intro') {
+        // Intro screen - 0% progress
+        progressPercentage = 0;
+        currentQuestionNum = 0;
+    } else {
+        // Regular questions - progress based on position
+        progressPercentage = (currentQuestion / totalQuestions) * 100;
+        currentQuestionNum = currentQuestion;
+    }
+    
+    document.getElementById('progressFill').style.width = `${progressPercentage}%`;
     document.getElementById('questionCounter').textContent = `Otázka ${currentQuestionNum} z ${totalQuestions} | Zodpovedané: ${answeredCount}`;
 }
 
