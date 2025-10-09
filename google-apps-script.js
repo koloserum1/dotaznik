@@ -14,14 +14,35 @@
 
 function doPost(e) {
   try {
+    Logger.log('doPost called');
+    
     const lock = LockService.getScriptLock();
     lock.tryLock(10000);
     
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Odpovede');
+    // Parse the incoming data
+    let data;
+    try {
+      if (e.postData && e.postData.contents) {
+        data = JSON.parse(e.postData.contents);
+      } else if (e.parameter) {
+        data = e.parameter;
+      } else {
+        throw new Error('No data received');
+      }
+      Logger.log('Data received: ' + JSON.stringify(data));
+    } catch (parseError) {
+      Logger.log('Parse error: ' + parseError.toString());
+      throw parseError;
+    }
+    
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    let sheet = ss.getSheetByName('Odpovede');
     
     // Create sheet if it doesn't exist
     if (!sheet) {
-      const newSheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet('Odpovede');
+      Logger.log('Creating new sheet: Odpovede');
+      sheet = ss.insertSheet('Odpovede');
+      
       // Add headers
       const headers = [
         'Timestamp',
@@ -43,21 +64,26 @@ function doPost(e) {
         'Q14: Nové funkcionality',
         'Q15: Ďalšie postrehy'
       ];
-      newSheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-      newSheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
-      newSheet.setFrozenRows(1);
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+      sheet.getRange(1, 1, 1, headers.length).setBackground('#4285f4');
+      sheet.getRange(1, 1, 1, headers.length).setFontColor('#ffffff');
+      sheet.setFrozenRows(1);
+      Logger.log('Headers created');
     }
     
-    const data = JSON.parse(e.postData.contents);
-    
     // Check if session already exists
-    const existingData = sheet.getDataRange().getValues();
+    const lastRow = sheet.getLastRow();
     let rowToUpdate = -1;
     
-    for (let i = 1; i < existingData.length; i++) {
-      if (existingData[i][1] === data.sessionId) {
-        rowToUpdate = i + 1; // +1 because rows are 1-indexed
-        break;
+    if (lastRow > 1) {
+      const sessionIds = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+      for (let i = 0; i < sessionIds.length; i++) {
+        if (sessionIds[i][0] === data.sessionId) {
+          rowToUpdate = i + 2; // +2 because: array is 0-indexed, and row 1 is header
+          Logger.log('Found existing session at row: ' + rowToUpdate);
+          break;
+        }
       }
     }
     
@@ -69,25 +95,39 @@ function doPost(e) {
       ...data.answers
     ];
     
+    Logger.log('Row data prepared: ' + rowData.length + ' columns');
+    
     if (rowToUpdate > 0) {
       // Update existing row
+      Logger.log('Updating row: ' + rowToUpdate);
       sheet.getRange(rowToUpdate, 1, 1, rowData.length).setValues([rowData]);
     } else {
       // Append new row
+      Logger.log('Appending new row');
       sheet.appendRow(rowData);
     }
     
     lock.releaseLock();
+    Logger.log('Success!');
     
     return ContentService
-      .createTextOutput(JSON.stringify({ 'result': 'success' }))
+      .createTextOutput(JSON.stringify({ 
+        'result': 'success',
+        'message': 'Data saved successfully',
+        'row': rowToUpdate > 0 ? rowToUpdate : (lastRow + 1)
+      }))
       .setMimeType(ContentService.MimeType.JSON);
       
   } catch (error) {
     Logger.log('Error: ' + error.toString());
+    Logger.log('Stack: ' + error.stack);
     
     return ContentService
-      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': error.toString() }))
+      .createTextOutput(JSON.stringify({ 
+        'result': 'error', 
+        'error': error.toString(),
+        'stack': error.stack
+      }))
       .setMimeType(ContentService.MimeType.JSON);
   }
 }

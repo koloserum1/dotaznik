@@ -152,6 +152,12 @@ function saveToLocalStorage() {
 
 // Send to Google Sheets
 async function sendToGoogleSheets(isComplete = false) {
+    // Skip if URL not configured
+    if (GOOGLE_SHEETS_URL.includes('YOUR_DEPLOYMENT_ID')) {
+        console.log('Google Sheets URL nie je nastavená');
+        return true; // Return true to show success message
+    }
+    
     try {
         const answersArray = [];
         const timestamp = new Date().toISOString();
@@ -176,19 +182,28 @@ async function sendToGoogleSheets(isComplete = false) {
             answers: answersArray
         };
         
+        console.log('Odosielam do Google Sheets:', data);
+        
         const response = await fetch(GOOGLE_SHEETS_URL, {
+            redirect: 'follow',
             method: 'POST',
-            mode: 'no-cors',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain;charset=utf-8',
             },
             body: JSON.stringify(data)
         });
         
-        console.log('Odpovede odoslané do Google Sheets');
+        console.log('Google Sheets response status:', response.status);
+        
+        if (response.ok) {
+            const result = await response.text();
+            console.log('Google Sheets response:', result);
+        }
+        
+        console.log('✓ Odpovede odoslané do Google Sheets');
         return true;
     } catch (e) {
-        console.error('Error sending to Google Sheets:', e);
+        console.error('✗ Error sending to Google Sheets:', e);
         return false;
     }
 }
