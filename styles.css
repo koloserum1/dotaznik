@@ -501,29 +501,35 @@ body {
 }
 
 /* Intro screen */
-.intro-title {
+.question.active .intro-title {
     font-size: 36px !important;
-    margin-bottom: 32px !important;
+    margin-bottom: 24px !important;
     font-weight: 500 !important;
     text-align: center;
 }
 
-.intro-content {
-    font-size: 18px;
-    line-height: 1.7;
+.question.active .intro-content {
+    font-size: 17px;
+    line-height: 1.6;
     color: #3c4043;
-    margin-bottom: 48px;
-    max-width: 640px;
+    margin: 0 auto 32px auto;
+    max-width: 580px;
     text-align: center;
 }
 
-.intro-button {
-    padding: 16px 40px;
+.intro-content br {
+    content: "";
+    display: block;
+    margin: 8px 0;
+}
+
+.question.active .intro-button {
+    padding: 14px 36px;
     background: #1967d2;
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -536,6 +542,16 @@ body {
     background: #1557b0;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(25, 103, 210, 0.3);
+}
+
+/* Center intro screen vertically and horizontally */
+.question[id="question-0"].active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60vh;
 }
 
 /* Scale component */
@@ -614,19 +630,26 @@ body {
 }
 
 @media (max-width: 768px) {
-    .intro-title {
+    .question.active .intro-title {
         font-size: 28px !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 20px !important;
     }
 
-    .intro-content {
+    .question.active .intro-content {
         font-size: 16px;
-        margin-bottom: 36px;
+        margin-bottom: 28px;
+        max-width: 90%;
+        line-height: 1.5;
     }
 
-    .intro-button {
-        width: 90%;
-        margin: 0 auto;
+    .intro-content br {
+        margin: 6px 0;
+    }
+
+    .question.active .intro-button {
+        width: auto;
+        min-width: 200px;
+        padding: 14px 32px;
     }
 
     .scale-options {

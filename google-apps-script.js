@@ -58,42 +58,52 @@ function doPost(e) {
       sheet = ss.insertSheet('Odpovede');
     }
     
-    // Check if headers exist (check if row 1 is empty or doesn't have the right headers)
-    let lastRow = sheet.getLastRow();
+    // Always recreate headers to ensure they match current questions
     const headers = [
       'Timestamp',
       'Session ID',
       'Je kompletné?',
-      'Q0: Úvod (N/A)',
+      'Q0: Nový branding (N/A)',
       'Q1: Rola',
       'Q2: Opis školy',
-      'Q3: Stotožnenie s vizuálnou identitou (1-5)',
+      'Q3: Stotožnenie s vizuálom (1-5)',
       'Q4: Tri slová ("|" separated)',
       'Q5: Výnimočnosť',
       'Q6: Slabiny',
       'Q7: Imidž za 5-10 rokov',
       'Q8: Návštevnosť webu',
-      'Q9: Čo je vydarené',
+      'Q9: Čo je vydarené na webe',
       'Q10: Nová vizuálna identita',
       'Q11: Nápad na logo',
       'Q12: Inšpiratívny dizajn (link)',
       'Q13: Ďalšie postrehy'
     ];
     
-    if (lastRow === 0 || sheet.getRange(1, 1).getValue() !== 'Timestamp') {
+    let lastRow = sheet.getLastRow();
+    
+    // Check if we need to reset/update headers
+    if (lastRow === 0 || sheet.getRange(1, 1).getValue() !== 'Timestamp' || sheet.getRange(1, 4).getValue() !== headers[3]) {
       Logger.log('Creating/Recreating headers');
+      
+      // Clear first row and recreate
+      if (lastRow > 0) {
+        sheet.getRange(1, 1, 1, headers.length).clearContent();
+      }
+      
       sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
       sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
       sheet.getRange(1, 1, 1, headers.length).setBackground('#4285f4');
       sheet.getRange(1, 1, 1, headers.length).setFontColor('#ffffff');
+      sheet.getRange(1, 1, 1, headers.length).setHorizontalAlignment('center');
       sheet.setFrozenRows(1);
       
       // Auto-resize columns for better readability
       for (let i = 1; i <= headers.length; i++) {
         sheet.autoResizeColumn(i);
+        sheet.setColumnWidth(i, Math.max(sheet.getColumnWidth(i), 150));
       }
       
-      Logger.log('Headers created');
+      Logger.log('Headers created/updated');
     }
     
     // Check if session already exists - refresh lastRow after potential header creation
