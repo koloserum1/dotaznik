@@ -502,29 +502,34 @@ body {
 
 /* Intro screen */
 .intro-title {
-    font-size: 28px !important;
-    margin-bottom: 20px !important;
+    font-size: 36px !important;
+    margin-bottom: 32px !important;
+    font-weight: 500 !important;
+    text-align: center;
 }
 
 .intro-content {
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.7;
     color: #3c4043;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
     max-width: 640px;
+    text-align: center;
 }
 
 .intro-button {
-    padding: 16px 32px;
+    padding: 16px 40px;
     background: #1967d2;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: inherit;
+    display: block;
+    margin: 0 auto;
 }
 
 .intro-button:hover {
@@ -610,15 +615,18 @@ body {
 
 @media (max-width: 768px) {
     .intro-title {
-        font-size: 24px !important;
+        font-size: 28px !important;
+        margin-bottom: 24px !important;
     }
 
     .intro-content {
         font-size: 16px;
+        margin-bottom: 36px;
     }
 
     .intro-button {
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
     }
 
     .scale-options {

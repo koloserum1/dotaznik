@@ -2,7 +2,7 @@
 const questions = [
     {
         number: 0,
-        title: "🔹 Úvodná správa",
+        title: "Nový branding Lýcea",
         description: "",
         type: "intro",
         content: `Milí študenti, učitelia, rodičia, absolventi a priatelia Lýcea,
@@ -339,6 +339,18 @@ function showQuestion(index) {
     const question = document.getElementById(`question-${index}`);
     if (question) {
         question.classList.add('active');
+    }
+
+    // Hide/Show navigation based on question type
+    const navigation = document.getElementById('navigation');
+    const progressBar = document.getElementById('progressBar');
+    
+    if (questions[index].type === 'intro') {
+        navigation.style.display = 'none';
+        progressBar.style.display = 'none';
+    } else {
+        navigation.style.display = 'flex';
+        progressBar.style.display = 'block';
     }
 
     // Restore previous answer if exists
