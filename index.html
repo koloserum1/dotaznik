@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lýceum Dotazník</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <div class="question-container" id="questionContainer">
+            <!-- Questions will be rendered here -->
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button" id="prevBtn" onclick="previousQuestion()">
+                ← Späť
+            </button>
+            <div class="question-counter" id="questionCounter"></div>
+            <button class="nav-button primary" id="nextBtn" onclick="nextQuestion()">
+                OK ✓
+            </button>
+        </div>
+
+        <div class="completion-screen" id="completionScreen">
+            <div class="completion-content">
+                <h1>✓ Ďakujeme!</h1>
+                <p>Váš dotazník bol úspešne odoslaný.</p>
+                <button class="nav-button primary" onclick="restartSurvey()">Vyplniť znova</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
