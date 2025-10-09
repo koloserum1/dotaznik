@@ -15,6 +15,7 @@
 function doPost(e) {
   try {
     Logger.log('doPost called');
+    Logger.log('e parameter: ' + JSON.stringify(e));
     
     const lock = LockService.getScriptLock();
     lock.tryLock(10000);
@@ -22,12 +23,25 @@ function doPost(e) {
     // Parse the incoming data
     let data;
     try {
+      if (!e) {
+        throw new Error('No event parameter received');
+      }
+      
       if (e.postData && e.postData.contents) {
+        Logger.log('Using e.postData.contents');
         data = JSON.parse(e.postData.contents);
+      } else if (e.parameter && e.parameter.data) {
+        Logger.log('Using e.parameter.data');
+        data = JSON.parse(e.parameter.data);
       } else if (e.parameter) {
+        Logger.log('Using e.parameter');
         data = e.parameter;
+      } else if (e.queryString) {
+        Logger.log('Using e.queryString');
+        data = JSON.parse(decodeURIComponent(e.queryString));
       } else {
-        throw new Error('No data received');
+        Logger.log('Available keys: ' + Object.keys(e).join(', '));
+        throw new Error('No data received in expected format');
       }
       Logger.log('Data received: ' + JSON.stringify(data));
     } catch (parseError) {

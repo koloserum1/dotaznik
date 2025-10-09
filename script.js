@@ -184,11 +184,15 @@ async function sendToGoogleSheets(isComplete = false) {
         
         console.log('Odosielam do Google Sheets:', data);
         
-        const response = await fetch(GOOGLE_SHEETS_URL, {
+        // Create URL with query parameters as backup method
+        const params = new URLSearchParams();
+        params.append('data', JSON.stringify(data));
+        
+        const response = await fetch(GOOGLE_SHEETS_URL + '?' + params.toString(), {
             redirect: 'follow',
             method: 'POST',
             headers: {
-                'Content-Type': 'text/plain;charset=utf-8',
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify(data)
         });
