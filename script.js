@@ -35,7 +35,7 @@ Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je an
     {
         number: 3,
         title: "Ako veľmi sa stotožňujete s výrokom:",
-        description: "„Vizuálna identita a komunikácia Lýcea dnes vystihuje, akou školou v skutočnosti sme."",
+        description: "\"Vizuálna identita a komunikácia Lýcea dnes vystihuje, akou školou v skutočnosti sme.\"",
         type: "scale",
         scaleMin: 1,
         scaleMax: 5,
