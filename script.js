@@ -184,7 +184,14 @@ async function sendToGoogleSheets(isComplete = false) {
                 if (q.type === 'intro') {
                     answer = 'N/A'; // Intro doesn't have answer
                 } else if (q.type === 'choice') {
-                    answer = q.choices[answers[index]];
+                    // Check if answer is object (with "other" text)
+                    if (typeof answers[index] === 'object' && answers[index].choiceIndex !== undefined) {
+                        const choiceText = q.choices[answers[index].choiceIndex];
+                        const otherText = answers[index].otherText || '';
+                        answer = otherText ? `${choiceText}: ${otherText}` : choiceText;
+                    } else {
+                        answer = q.choices[answers[index]];
+                    }
                 } else if (q.type === 'scale') {
                     answer = answers[index].toString();
                 } else if (q.type === 'multiple_text') {
@@ -266,8 +273,9 @@ function renderQuestions() {
             contentHTML += '<div class="choices">';
             q.choices.forEach((choice, choiceIndex) => {
                 const letter = String.fromCharCode(65 + choiceIndex); // A, B, C, etc.
+                const isOtherOption = choice.toLowerCase().includes('iné') || choice.toLowerCase().includes('uvede');
                 contentHTML += `
-                    <div class="choice" onclick="selectChoice(${index}, ${choiceIndex})">
+                    <div class="choice" onclick="selectChoice(${index}, ${choiceIndex})" data-is-other="${isOtherOption}">
                         <div class="choice-content">
                             <span class="choice-letter">${letter}</span>
                             <span>${choice}</span>
@@ -277,6 +285,17 @@ function renderQuestions() {
                 `;
             });
             contentHTML += '</div>';
+            
+            // Add text input for "other" option
+            contentHTML += `
+                <div class="other-input-container" id="other-input-${index}" style="display: none;">
+                    <input type="text" 
+                           class="text-input other-text-input" 
+                           id="other-text-${index}" 
+                           placeholder="Uveďte vašu rolu..."
+                           oninput="saveOtherText(${index})">
+                </div>
+            `;
         } else if (q.type === 'text') {
             contentHTML += `
                 <input type="text" 
@@ -358,7 +377,22 @@ function showQuestion(index) {
         const question = questions[index];
         if (question.type === 'choice') {
             const choices = document.querySelectorAll(`#question-${index} .choice`);
-            if (choices[answers[index]]) {
+            
+            // Check if answer is object (with "other" text)
+            if (typeof answers[index] === 'object' && answers[index].choiceIndex !== undefined) {
+                const choiceIndex = answers[index].choiceIndex;
+                if (choices[choiceIndex]) {
+                    choices[choiceIndex].classList.add('selected');
+                    
+                    // Show and restore "other" text input
+                    const otherContainer = document.getElementById(`other-input-${index}`);
+                    const otherInput = document.getElementById(`other-text-${index}`);
+                    if (otherContainer && otherInput) {
+                        otherContainer.style.display = 'block';
+                        otherInput.value = answers[index].otherText || '';
+                    }
+                }
+            } else if (choices[answers[index]]) {
                 choices[answers[index]].classList.add('selected');
             }
         } else if (question.type === 'scale') {
@@ -393,19 +427,60 @@ function selectChoice(questionIndex, choiceIndex) {
     choices.forEach(c => c.classList.remove('selected'));
 
     // Add new selection
-    choices[choiceIndex].classList.add('selected');
+    const selectedChoice = choices[choiceIndex];
+    selectedChoice.classList.add('selected');
 
-    // Save answer
-    answers[questionIndex] = choiceIndex;
+    // Check if this is "other" option
+    const isOther = selectedChoice.getAttribute('data-is-other') === 'true';
+    const otherContainer = document.getElementById(`other-input-${questionIndex}`);
+    
+    if (isOther && otherContainer) {
+        // Show text input for "other" option
+        otherContainer.style.display = 'block';
+        const otherInput = document.getElementById(`other-text-${questionIndex}`);
+        if (otherInput) {
+            otherInput.focus();
+        }
+        
+        // Save as object with choice index and text
+        const otherText = otherInput ? otherInput.value : '';
+        answers[questionIndex] = {
+            choiceIndex: choiceIndex,
+            otherText: otherText
+        };
+    } else {
+        // Hide text input
+        if (otherContainer) {
+            otherContainer.style.display = 'none';
+        }
+        
+        // Save answer normally
+        answers[questionIndex] = choiceIndex;
+    }
     
     // Save to localStorage immediately
     saveToLocalStorage();
     
     // Save to Google Sheets in background
     sendToGoogleSheets(false);
+}
 
-    // Auto-advance after a short delay (removed for better UX with buttons)
-    // User will use "Pokračovať" button
+// Save "other" text for choice questions
+function saveOtherText(questionIndex) {
+    const otherInput = document.getElementById(`other-text-${questionIndex}`);
+    const currentAnswer = answers[questionIndex];
+    
+    if (typeof currentAnswer === 'object' && currentAnswer.choiceIndex !== undefined) {
+        // Update the otherText property
+        answers[questionIndex].otherText = otherInput.value;
+        
+        // Debounced save
+        clearTimeout(window.saveTimeout);
+        window.saveTimeout = setTimeout(() => {
+            saveToLocalStorage();
+            sendToGoogleSheets(false);
+        }, 2000);
+    }
 }
 
 // Save text/textarea answer

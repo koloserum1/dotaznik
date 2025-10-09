@@ -629,6 +629,16 @@ body {
     font-weight: 500;
 }
 
+/* Other input for choice questions */
+.other-input-container {
+    margin-top: 16px;
+    max-width: 640px;
+}
+
+.other-text-input {
+    margin-top: 0;
+}
+
 @media (max-width: 768px) {
     .question.active .intro-title {
         font-size: 28px !important;
