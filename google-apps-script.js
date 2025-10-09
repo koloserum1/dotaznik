@@ -64,21 +64,20 @@ function doPost(e) {
       'Timestamp',
       'Session ID',
       'Je kompletné?',
+      'Q0: Úvod (N/A)',
       'Q1: Rola',
       'Q2: Opis školy',
-      'Q3: Tri slová',
-      'Q4: Hodnoty a princípy',
+      'Q3: Stotožnenie s vizuálnou identitou (1-5)',
+      'Q4: Tri slová ("|" separated)',
       'Q5: Výnimočnosť',
       'Q6: Slabiny',
-      'Q7: Odporúčanie',
-      'Q8: Logo a farby',
-      'Q9: Tradície',
-      'Q10: Imidž za 5-10 rokov',
-      'Q11: Návštevnosť webu',
-      'Q12: Čo je vydarené',
-      'Q13: Čo chýba',
-      'Q14: Nové funkcionality',
-      'Q15: Ďalšie postrehy'
+      'Q7: Imidž za 5-10 rokov',
+      'Q8: Návštevnosť webu',
+      'Q9: Čo je vydarené',
+      'Q10: Nová vizuálna identita',
+      'Q11: Nápad na logo',
+      'Q12: Inšpiratívny dizajn (link)',
+      'Q13: Ďalšie postrehy'
     ];
     
     if (lastRow === 0 || sheet.getRange(1, 1).getValue() !== 'Timestamp') {

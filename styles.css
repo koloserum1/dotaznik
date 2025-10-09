@@ -500,3 +500,138 @@ body {
     }
 }
 
+/* Intro screen */
+.intro-title {
+    font-size: 28px !important;
+    margin-bottom: 20px !important;
+}
+
+.intro-content {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #3c4043;
+    margin-bottom: 40px;
+    max-width: 640px;
+}
+
+.intro-button {
+    padding: 16px 32px;
+    background: #1967d2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.intro-button:hover {
+    background: #1557b0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 103, 210, 0.3);
+}
+
+/* Scale component */
+.scale-container {
+    max-width: 640px;
+}
+
+.scale-options {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.scale-option {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.scale-number {
+    width: 100%;
+    padding: 16px;
+    background: #e8f0fe;
+    border: 2px solid #e8f0fe;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1967d2;
+    transition: all 0.2s ease;
+}
+
+.scale-option:hover .scale-number {
+    background: #d2e3fc;
+    border-color: #d2e3fc;
+}
+
+.scale-option.selected .scale-number {
+    background: #1967d2;
+    color: white;
+    border-color: #1967d2;
+}
+
+.scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #5f6368;
+    font-style: italic;
+}
+
+.scale-label-min,
+.scale-label-max {
+    max-width: 45%;
+}
+
+/* Multiple text fields */
+.multiple-text-container {
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.text-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.text-field-label {
+    font-size: 14px;
+    color: #5f6368;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .intro-title {
+        font-size: 24px !important;
+    }
+
+    .intro-content {
+        font-size: 16px;
+    }
+
+    .intro-button {
+        width: 100%;
+    }
+
+    .scale-options {
+        gap: 8px;
+    }
+
+    .scale-number {
+        padding: 12px;
+        font-size: 18px;
+    }
+
+    .scale-labels {
+        font-size: 12px;
+    }
+}
+

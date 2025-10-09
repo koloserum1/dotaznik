@@ -1,9 +1,21 @@
 // Survey questions data
 const questions = [
     {
+        number: 0,
+        title: "🔹 Úvodná správa",
+        description: "",
+        type: "intro",
+        content: `Milí študenti, učitelia, rodičia, absolventi a priatelia Lýcea,
+
+pracujeme na novej vizuálnej identite a webovej prezentácii školy.
+Chceme, aby Lýceum navonok vyzeralo tak, ako ho všetci reálne vnímame – ako moderné, otvorené a inšpiratívne miesto.
+
+Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou tejto zmeny. 💜`
+    },
+    {
         number: 1,
         title: "Aká je Vaša rola vo vzťahu k Lýceu?",
-        description: "(študent, učiteľ, rodič, sponzor/iný podporovateľ, absolvent, iné – uveďte)",
+        description: "",
         type: "choice",
         choices: [
             "študent",
@@ -22,15 +34,23 @@ const questions = [
     },
     {
         number: 3,
-        title: "Ktoré tri slová alebo vlastnosti podľa Vás najlepšie vystihujú Lýceum?",
-        description: "(Môžete uviesť 1–3 prívlastky alebo krátke slovné spojenia)",
-        type: "textarea"
+        title: "Ako veľmi sa stotožňujete s výrokom:",
+        description: "„Vizuálna identita a komunikácia Lýcea dnes vystihuje, akou školou v skutočnosti sme."",
+        type: "scale",
+        scaleMin: 1,
+        scaleMax: 5,
+        scaleLabels: ["Vôbec nesúhlasím", "Úplne súhlasím"]
     },
     {
         number: 4,
-        title: "Aké hodnoty a princípy podľa Vás Lýceum reprezentuje?",
-        description: "Čo sú tie hlavné idey, za ktorými si škola stojí?",
-        type: "textarea"
+        title: "Ktoré tri slová alebo vlastnosti podľa Vás najlepšie vystihujú Lýceum?",
+        description: "(Môžete uviesť 1–3 prívlastky alebo krátke slovné spojenia)",
+        type: "multiple_text",
+        textFields: [
+            { label: "Slovo 1", required: true },
+            { label: "Slovo 2", required: false },
+            { label: "Slovo 3", required: false }
+        ]
     },
     {
         number: 5,
@@ -46,54 +66,49 @@ const questions = [
     },
     {
         number: 7,
-        title: "Odporučili by ste Lýceum svojim známym alebo rodine?",
-        description: "Prečo áno alebo prečo nie?",
-        type: "textarea"
-    },
-    {
-        number: 8,
-        title: "Čo si myslíte o súčasnom logu, farbách a celkovom vizuálnom štýle Lýcea?",
-        description: "Vystihuje podľa Vás vizuál školy jej ducha, alebo by to chcelo zmenu? (Čo sa Vám na aktuálnom vizuáli páči a čo naopak nie?)",
-        type: "textarea"
-    },
-    {
-        number: 9,
-        title: "Sú podľa Vás nejaké tradície, symboly alebo historické prvky spojené s Lýceom, ktoré by sme mali zachovať či zdôrazniť v novej identite?",
-        description: "(Napríklad významná história školy, motto, logo školy, školské farby, tradičné podujatia a pod.)",
-        type: "textarea"
-    },
-    {
-        number: 10,
         title: "Predstavte si, že o 5–10 rokov má Lýceum výbornú povesť presne takú, akú by ste si priali. Aký imidž alebo reputáciu by v ideálnom prípade mala škola mať?",
         description: "(Inými slovami: čím by ste chceli, aby bolo Lýceum známe?)",
         type: "textarea"
     },
     {
-        number: 11,
+        number: 8,
         title: "Ako často a na aké účely navštevujete oficiálnu webovú stránku Lýcea?",
-        description: "(Napr. denne/týždenne alebo iba občas; a čo tam hľadáte – informácie o štúdiu, aktuality, rozvrh, kontakty, …)",
-        type: "textarea"
+        description: "",
+        type: "choice",
+        choices: [
+            "Denne – potrebujem aktuálne info (rozvrh, aktuality, ...)",
+            "Niekoľkokrát do týždňa",
+            "Občas, len keď niečo konkrétne hľadám",
+            "Zriedka alebo vôbec",
+            "Nenavštevujem web, informácie získavam inde"
+        ]
     },
     {
-        number: 12,
+        number: 9,
         title: "Čo na súčasnej webovej stránke považujete za vydarené alebo užitočné?",
         description: "(Je niečo, čo sa Vám na webe páči, dobre sa Vám používa alebo Vám to uľahčuje získavať informácie?)",
         type: "textarea"
     },
     {
+        number: 10,
+        title: "Ako by ste chceli, aby pôsobila nová vizuálna identita Lýcea?",
+        description: "Aký dojem alebo emóciu by mala vyvolávať?",
+        type: "textarea"
+    },
+    {
+        number: 11,
+        title: "Máte predstavu alebo nápad, ako by mohlo vyzerať nové logo Lýcea?",
+        description: "(Čo by malo symbolizovať, aké prvky alebo farby by mohlo obsahovať?)",
+        type: "textarea"
+    },
+    {
+        number: 12,
+        title: "Máte nejaký obrázok, logo alebo dizajn, ktorý vás inšpiruje a mohol by byť pre Lýceum príkladom?",
+        description: "(Môžete vložiť link na Google Drive, Dropbox alebo akúkoľvek URL obrázka)",
+        type: "textarea"
+    },
+    {
         number: 13,
-        title: "A naopak – čo Vám na súčasnej webovej stránke najviac prekáža alebo chýba?",
-        description: "Opíšte, aké problémy ste pri používaní webu zažili alebo čo na ňom neviete nájsť.",
-        type: "textarea"
-    },
-    {
-        number: 14,
-        title: "Aké nové funkcionality alebo obsah by ste uvítali na novej webovej stránke Lýcea?",
-        description: "Čo Vám tam teraz chýba, hoci by to bolo užitočné?",
-        type: "textarea"
-    },
-    {
-        number: 15,
         title: "Máte ešte nejaké ďalšie postrehy alebo nápady ohľadom značky, vizuálnej identity či komunikácie Lýcea, ktoré by ste nám chceli povedať?",
         description: "",
         type: "textarea"
@@ -165,9 +180,18 @@ async function sendToGoogleSheets(isComplete = false) {
         // Prepare data for Google Sheets
         questions.forEach((q, index) => {
             let answer = '';
-            if (answers[index] !== undefined) {
-                if (q.type === 'choice') {
+            if (answers[index] !== undefined && answers[index] !== null) {
+                if (q.type === 'intro') {
+                    answer = 'N/A'; // Intro doesn't have answer
+                } else if (q.type === 'choice') {
                     answer = q.choices[answers[index]];
+                } else if (q.type === 'scale') {
+                    answer = answers[index].toString();
+                } else if (q.type === 'multiple_text') {
+                    // Join array answers with " | "
+                    answer = Array.isArray(answers[index]) 
+                        ? answers[index].filter(a => a).join(' | ') 
+                        : '';
                 } else {
                     answer = answers[index];
                 }
@@ -222,17 +246,23 @@ function renderQuestions() {
         questionDiv.className = 'question';
         questionDiv.id = `question-${index}`;
 
-        let contentHTML = `
-            <div class="question-number" data-number="${q.number}">
-            </div>
-            <h2 class="question-title">${q.title}</h2>
-        `;
+        let contentHTML = '';
+        
+        // Don't show number for intro
+        if (q.type !== 'intro') {
+            contentHTML += `<div class="question-number" data-number="${q.number}"></div>`;
+        }
+        
+        contentHTML += `<h2 class="question-title ${q.type === 'intro' ? 'intro-title' : ''}">${q.title}</h2>`;
 
         if (q.description) {
             contentHTML += `<p class="question-description">${q.description}</p>`;
         }
 
-        if (q.type === 'choice') {
+        if (q.type === 'intro') {
+            contentHTML += `<div class="intro-content">${q.content.replace(/\n/g, '<br>')}</div>`;
+            contentHTML += `<button class="intro-button" onclick="nextQuestion()">Začať dotazník →</button>`;
+        } else if (q.type === 'choice') {
             contentHTML += '<div class="choices">';
             q.choices.forEach((choice, choiceIndex) => {
                 const letter = String.fromCharCode(65 + choiceIndex); // A, B, C, etc.
@@ -264,6 +294,38 @@ function renderQuestions() {
                           oninput="saveTextAnswer(${index})"></textarea>
                 <div class="input-hint">Shift ⇧ + Enter ↵ to make a line break</div>
             `;
+        } else if (q.type === 'scale') {
+            contentHTML += '<div class="scale-container">';
+            contentHTML += '<div class="scale-options">';
+            for (let i = q.scaleMin; i <= q.scaleMax; i++) {
+                contentHTML += `
+                    <div class="scale-option" onclick="selectScale(${index}, ${i})">
+                        <div class="scale-number">${i}</div>
+                    </div>
+                `;
+            }
+            contentHTML += '</div>';
+            contentHTML += '<div class="scale-labels">';
+            contentHTML += `<span class="scale-label-min">${q.scaleLabels[0]}</span>`;
+            contentHTML += `<span class="scale-label-max">${q.scaleLabels[1]}</span>`;
+            contentHTML += '</div>';
+            contentHTML += '</div>';
+        } else if (q.type === 'multiple_text') {
+            contentHTML += '<div class="multiple-text-container">';
+            q.textFields.forEach((field, fieldIndex) => {
+                contentHTML += `
+                    <div class="text-field-group">
+                        <label class="text-field-label">${field.label}${field.required ? ' *' : ''}</label>
+                        <input type="text" 
+                               class="text-input" 
+                               id="input-${index}-${fieldIndex}" 
+                               placeholder="${field.label}"
+                               oninput="saveMultipleTextAnswer(${index}, ${fieldIndex})"
+                               ${field.required ? 'required' : ''}>
+                    </div>
+                `;
+            });
+            contentHTML += '</div>';
         }
 
         questionDiv.innerHTML = contentHTML;
@@ -280,12 +342,26 @@ function showQuestion(index) {
     }
 
     // Restore previous answer if exists
-    if (answers[index] !== undefined) {
+    if (answers[index] !== undefined && answers[index] !== null) {
         const question = questions[index];
         if (question.type === 'choice') {
             const choices = document.querySelectorAll(`#question-${index} .choice`);
-            choices[answers[index]].classList.add('selected');
-        } else {
+            if (choices[answers[index]]) {
+                choices[answers[index]].classList.add('selected');
+            }
+        } else if (question.type === 'scale') {
+            const options = document.querySelectorAll(`#question-${index} .scale-option`);
+            if (options[answers[index] - 1]) {
+                options[answers[index] - 1].classList.add('selected');
+            }
+        } else if (question.type === 'multiple_text' && Array.isArray(answers[index])) {
+            answers[index].forEach((value, fieldIndex) => {
+                const input = document.getElementById(`input-${index}-${fieldIndex}`);
+                if (input && value) {
+                    input.value = value;
+                }
+            });
+        } else if (question.type !== 'intro') {
             const input = document.getElementById(`input-${index}`);
             if (input) {
                 input.value = answers[index];
@@ -326,6 +402,46 @@ function saveTextAnswer(questionIndex) {
     answers[questionIndex] = input.value;
     
     // Debounced save to avoid too many saves
+    clearTimeout(window.saveTimeout);
+    window.saveTimeout = setTimeout(() => {
+        saveToLocalStorage();
+        sendToGoogleSheets(false);
+    }, 2000);
+}
+
+// Select scale value
+function selectScale(questionIndex, value) {
+    // Remove previous selection
+    const options = document.querySelectorAll(`#question-${questionIndex} .scale-option`);
+    options.forEach(o => o.classList.remove('selected'));
+    
+    // Add new selection
+    const selectedOption = options[value - 1]; // value is 1-5, index is 0-4
+    selectedOption.classList.add('selected');
+    
+    // Save answer
+    answers[questionIndex] = value;
+    
+    // Save to localStorage immediately
+    saveToLocalStorage();
+    
+    // Save to Google Sheets in background
+    sendToGoogleSheets(false);
+}
+
+// Save multiple text answer
+function saveMultipleTextAnswer(questionIndex, fieldIndex) {
+    const question = questions[questionIndex];
+    const input = document.getElementById(`input-${questionIndex}-${fieldIndex}`);
+    
+    // Initialize answers as array if not exists
+    if (!Array.isArray(answers[questionIndex])) {
+        answers[questionIndex] = [];
+    }
+    
+    answers[questionIndex][fieldIndex] = input.value;
+    
+    // Debounced save
     clearTimeout(window.saveTimeout);
     window.saveTimeout = setTimeout(() => {
         saveToLocalStorage();
