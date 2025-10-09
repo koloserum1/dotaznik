@@ -56,38 +56,49 @@ function doPost(e) {
     if (!sheet) {
       Logger.log('Creating new sheet: Odpovede');
       sheet = ss.insertSheet('Odpovede');
-      
-      // Add headers
-      const headers = [
-        'Timestamp',
-        'Session ID',
-        'Je kompletné?',
-        'Q1: Rola',
-        'Q2: Opis školy',
-        'Q3: Tri slová',
-        'Q4: Hodnoty a princípy',
-        'Q5: Výnimočnosť',
-        'Q6: Slabiny',
-        'Q7: Odporúčanie',
-        'Q8: Logo a farby',
-        'Q9: Tradície',
-        'Q10: Imidž za 5-10 rokov',
-        'Q11: Návštevnosť webu',
-        'Q12: Čo je vydarené',
-        'Q13: Čo chýba',
-        'Q14: Nové funkcionality',
-        'Q15: Ďalšie postrehy'
-      ];
+    }
+    
+    // Check if headers exist (check if row 1 is empty or doesn't have the right headers)
+    let lastRow = sheet.getLastRow();
+    const headers = [
+      'Timestamp',
+      'Session ID',
+      'Je kompletné?',
+      'Q1: Rola',
+      'Q2: Opis školy',
+      'Q3: Tri slová',
+      'Q4: Hodnoty a princípy',
+      'Q5: Výnimočnosť',
+      'Q6: Slabiny',
+      'Q7: Odporúčanie',
+      'Q8: Logo a farby',
+      'Q9: Tradície',
+      'Q10: Imidž za 5-10 rokov',
+      'Q11: Návštevnosť webu',
+      'Q12: Čo je vydarené',
+      'Q13: Čo chýba',
+      'Q14: Nové funkcionality',
+      'Q15: Ďalšie postrehy'
+    ];
+    
+    if (lastRow === 0 || sheet.getRange(1, 1).getValue() !== 'Timestamp') {
+      Logger.log('Creating/Recreating headers');
       sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
       sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
       sheet.getRange(1, 1, 1, headers.length).setBackground('#4285f4');
       sheet.getRange(1, 1, 1, headers.length).setFontColor('#ffffff');
       sheet.setFrozenRows(1);
+      
+      // Auto-resize columns for better readability
+      for (let i = 1; i <= headers.length; i++) {
+        sheet.autoResizeColumn(i);
+      }
+      
       Logger.log('Headers created');
     }
     
-    // Check if session already exists
-    const lastRow = sheet.getLastRow();
+    // Check if session already exists - refresh lastRow after potential header creation
+    lastRow = sheet.getLastRow();
     let rowToUpdate = -1;
     
     if (lastRow > 1) {
