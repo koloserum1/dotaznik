@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="progress-bar">
+        <div class="progress-bar" id="progressBar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
         
@@ -16,21 +16,32 @@
             <!-- Questions will be rendered here -->
         </div>
 
-        <div class="navigation">
+        <div class="navigation" id="navigation">
             <button class="nav-button" id="prevBtn" onclick="previousQuestion()">
                 ← Späť
             </button>
             <div class="question-counter" id="questionCounter"></div>
             <button class="nav-button primary" id="nextBtn" onclick="nextQuestion()">
-                OK ✓
+                Pokračovať →
             </button>
         </div>
 
         <div class="completion-screen" id="completionScreen">
             <div class="completion-content">
-                <h1>✓ Ďakujeme!</h1>
-                <p>Váš dotazník bol úspešne odoslaný.</p>
-                <button class="nav-button primary" onclick="restartSurvey()">Vyplniť znova</button>
+                <div class="loading" id="loadingIndicator" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Odosielam odpovede...</p>
+                </div>
+                <div id="successMessage" style="display: none;">
+                    <h1>✓ Ďakujeme!</h1>
+                    <p>Váš dotazník bol úspešne odoslaný.</p>
+                    <button class="nav-button primary" onclick="restartSurvey()">Vyplniť znova</button>
+                </div>
+                <div id="errorMessage" style="display: none;">
+                    <h1>⚠ Pozor</h1>
+                    <p>Vaše odpovede sú uložené lokálne. Skúsime ich odoslať automaticky.</p>
+                    <button class="nav-button primary" onclick="restartSurvey()">Vyplniť znova</button>
+                </div>
             </div>
         </div>
     </div>
