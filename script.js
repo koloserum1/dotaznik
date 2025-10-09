@@ -1,17 +1,17 @@
 // Survey questions data
 const questions = [
-    {
-        number: 0,
-        title: "Nový branding Lýcea",
-        description: "",
-        type: "intro",
-        content: `Milí študenti, učitelia, rodičia, absolventi a priatelia Lýcea,
+            {
+                number: 0,
+                title: "Nový branding Lýcea",
+                description: "",
+                type: "intro",
+                content: `Milí študenti, učitelia, rodičia a priatelia Lýcea,
 
 pracujeme na novej vizuálnej identite a webovej prezentácii školy.
 Chceme, aby Lýceum navonok vyzeralo tak, ako ho všetci reálne vnímame – ako moderné, otvorené a inšpiratívne miesto.
 
 Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou tejto zmeny. 💜`
-    },
+            },
     {
         number: 1,
         title: "Aká je Vaša rola vo vzťahu k Lýceu?",
