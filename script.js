@@ -480,15 +480,29 @@ function previousQuestion() {
 
 // Update progress bar
 function updateProgress() {
-    // Calculate answered questions
+    // Calculate answered questions (exclude intro)
     const answeredCount = Object.keys(answers).filter(key => {
         const answer = answers[key];
+        const questionIndex = parseInt(key);
+        const question = questions[questionIndex];
+        
+        // Skip intro questions
+        if (question && question.type === 'intro') {
+            return false;
+        }
+        
         return answer !== undefined && answer !== null && answer !== '';
     }).length;
     
-    const progress = (answeredCount / questions.length) * 100;
+    // Total questions excluding intro
+    const totalQuestions = questions.filter(q => q.type !== 'intro').length;
+    const progress = (answeredCount / totalQuestions) * 100;
+    
     document.getElementById('progressFill').style.width = `${progress}%`;
-    document.getElementById('questionCounter').textContent = `Otázka ${currentQuestion + 1} z ${questions.length} | Zodpovedané: ${answeredCount}`;
+    
+    // Adjust question counter to not include intro
+    const currentQuestionNum = questions[currentQuestion].type === 'intro' ? 0 : currentQuestion;
+    document.getElementById('questionCounter').textContent = `Otázka ${currentQuestionNum} z ${totalQuestions} | Zodpovedané: ${answeredCount}`;
 }
 
 // Update navigation buttons
