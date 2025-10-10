@@ -639,6 +639,37 @@ body {
     margin-top: 0;
 }
 
+/* Required field indicator */
+.required {
+    color: #ea4335;
+    font-weight: bold;
+    margin-left: 4px;
+}
+
+/* Required field error */
+.required-error {
+    background: #fce8e6;
+    border: 1px solid #ea4335;
+    border-radius: 8px;
+    color: #d93025;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 768px) {
     .question.active .intro-title {
         font-size: 28px !important;

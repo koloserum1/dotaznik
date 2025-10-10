@@ -17,6 +17,7 @@ Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je an
         title: "Aká je Vaša rola vo vzťahu k Lýceu?",
         description: "",
         type: "choice",
+        required: true,
         choices: [
             "študent",
             "učiteľ",
@@ -37,6 +38,7 @@ Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je an
         title: "Ako veľmi sa stotožňujete s výrokom:",
         description: "\"Vizuálna identita a komunikácia Lýcea dnes vystihuje, akou školou v skutočnosti sme.\"",
         type: "scale",
+        required: true,
         scaleMin: 1,
         scaleMax: 5,
         scaleLabels: ["Vôbec nesúhlasím", "Úplne súhlasím"]
@@ -46,6 +48,7 @@ Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je an
         title: "Ktoré tri slová alebo vlastnosti podľa Vás najlepšie vystihujú Lýceum?",
         description: "(Môžete uviesť 1–3 prívlastky alebo krátke slovné spojenia)",
         type: "multiple_text",
+        required: true,
         textFields: [
             { label: "Slovo 1", required: true },
             { label: "Slovo 2", required: false },
@@ -75,6 +78,7 @@ Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je an
         title: "Ako často a na aké účely navštevujete oficiálnu webovú stránku Lýcea?",
         description: "",
         type: "choice",
+        required: true,
         choices: [
             "Denne – potrebujem aktuálne info (rozvrh, aktuality, ...)",
             "Niekoľkokrát do týždňa",
@@ -273,7 +277,7 @@ function renderQuestions() {
             contentHTML += `<div class="question-number" data-number="${q.number}"></div>`;
         }
         
-        contentHTML += `<h2 class="question-title ${q.type === 'intro' ? 'intro-title' : ''}">${q.title}</h2>`;
+        contentHTML += `<h2 class="question-title ${q.type === 'intro' ? 'intro-title' : ''}">${q.title}${q.required ? ' <span class="required">*</span>' : ''}</h2>`;
 
         if (q.description) {
             contentHTML += `<p class="question-description">${q.description}</p>`;
@@ -551,11 +555,65 @@ function saveMultipleTextAnswer(questionIndex, fieldIndex) {
 
 // Navigate to next question
 function nextQuestion() {
+    // Check if current question is required and answered
+    const currentQ = questions[currentQuestion];
+    if (currentQ.required && !isQuestionAnswered(currentQuestion)) {
+        showRequiredError();
+        return;
+    }
+    
     if (currentQuestion < questions.length - 1) {
         showQuestion(currentQuestion + 1);
     } else {
         // Survey completed
         completeSurvey();
+    }
+}
+
+// Check if question is answered
+function isQuestionAnswered(questionIndex) {
+    const answer = answers[questionIndex];
+    const question = questions[questionIndex];
+    
+    if (question.type === 'choice') {
+        if (typeof answer === 'object' && answer.choiceIndex !== undefined) {
+            return answer.otherText && answer.otherText.trim() !== '';
+        }
+        return answer !== undefined && answer !== null;
+    } else if (question.type === 'scale') {
+        return answer !== undefined && answer !== null;
+    } else if (question.type === 'multiple_text') {
+        if (Array.isArray(answer)) {
+            return answer.some(a => a && a.trim() !== '');
+        }
+        return false;
+    } else {
+        return answer !== undefined && answer !== null && answer.trim() !== '';
+    }
+}
+
+// Show required field error
+function showRequiredError() {
+    const question = document.getElementById(`question-${currentQuestion}`);
+    if (question) {
+        // Remove existing error
+        const existingError = question.querySelector('.required-error');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        // Add error message
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'required-error';
+        errorDiv.textContent = 'Táto otázka je povinná. Prosím, odpovedzte na ňu.';
+        question.appendChild(errorDiv);
+        
+        // Remove error after 3 seconds
+        setTimeout(() => {
+            if (errorDiv.parentNode) {
+                errorDiv.remove();
+            }
+        }, 3000);
     }
 }
 
