@@ -676,13 +676,27 @@ function restartSurvey() {
 
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    // Arrow keys navigation
+    if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        previousQuestion();
+    } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextQuestion();
+    }
+    // Enter key navigation (but not in text areas)
+    else if (e.key === 'Enter' && !e.shiftKey) {
         const activeElement = document.activeElement;
         // Only auto-advance if not in textarea
         if (activeElement.tagName !== 'TEXTAREA') {
             e.preventDefault();
             nextQuestion();
         }
+    }
+    // Shift+Enter in text areas for new line (allow default behavior)
+    else if (e.key === 'Enter' && e.shiftKey && e.target.tagName === 'TEXTAREA') {
+        // Allow default behavior (new line)
+        return;
     }
 });
 
