@@ -175,7 +175,20 @@ async function sendToGoogleSheets(isComplete = false) {
     
     try {
         const answersArray = [];
-        const timestamp = new Date().toISOString();
+        // Get Slovak time (UTC+1 in winter, UTC+2 in summer)
+        const now = new Date();
+        const slovakTime = new Intl.DateTimeFormat('sk-SK', {
+            timeZone: 'Europe/Bratislava',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        }).formatToParts(now);
+        
+        const timestamp = `${slovakTime[4].value}-${slovakTime[2].value}-${slovakTime[0].value} ${slovakTime[6].value}:${slovakTime[8].value}:${slovakTime[10].value}`;
         
         // Prepare data for Google Sheets
         questions.forEach((q, index) => {
