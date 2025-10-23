@@ -775,6 +775,11 @@ function showQuestion(index) {
             contentSide.classList.remove('full-width');
         }
     }
+    
+    // Mobile specific: always show building side for questions after intro
+    if (index >= 1 && buildingSide && window.innerWidth <= 1024) {
+        buildingSide.classList.add('visible');
+    }
 
     // Restore previous answer if exists
     if (answers[index] !== undefined && answers[index] !== null) {
