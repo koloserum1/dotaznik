@@ -204,14 +204,14 @@ body {
         flex: 0 0 auto;
         height: auto;
         position: relative;
-        padding: 0px 15px 8px 15px;
+        padding: 0px 15px 5px 15px;
         min-height: auto;
         border-left: none;
         border-top: none;
         order: 2;
         width: 100%;
         background: white;
-        margin-top: -30px;
+        margin-top: -40px;
     }
 
     .building-side.visible {
@@ -226,9 +226,9 @@ body {
     .building-visualization {
         max-width: 100%;
         width: 100%;
-        max-width: min(380px, 90vw);
+        max-width: min(360px, 85vw);
         margin: 0 auto;
-        margin-top: -10px;
+        margin-top: -15px;
     }
     
     #buildingSvg {
@@ -237,20 +237,23 @@ body {
 
     .building-intro-message {
         margin-bottom: 0px;
-        margin-top: 0;
+        margin-top: -5px;
         padding-bottom: 0;
+        padding-top: 0;
     }
 
     .building-intro-message h2 {
-        font-size: 18px;
+        font-size: 17px;
         margin-bottom: 0px;
         padding-bottom: 0;
+        line-height: 1.2;
     }
 
     .building-intro-message p {
-        font-size: 14px;
+        font-size: 13px;
         margin-bottom: 0px;
         padding-bottom: 0;
+        line-height: 1.4;
     }
     
     .navigation {
@@ -719,22 +722,32 @@ body {
     }
 
     .building-side {
-        padding: 0px 10px 8px 10px;
+        padding: 0px 10px 5px 10px;
         min-height: auto;
-        margin-top: -30px;
+        margin-top: -40px;
         border-top: none;
     }
 
     .building-visualization {
         max-width: 100%;
-        max-width: min(350px, 90vw);
-        margin-top: -10px;
+        max-width: min(330px, 85vw);
+        margin-top: -15px;
     }
     
     #buildingSvg {
         width: 100%;
-        max-width: 350px;
+        max-width: 330px;
         height: auto;
+    }
+    
+    .building-message {
+        margin-top: 5px;
+        min-height: 20px;
+    }
+    
+    .building-message p {
+        font-size: 13px;
+        padding: 6px 14px;
     }
 
     .question-number {
