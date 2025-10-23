@@ -202,8 +202,8 @@ body {
         flex: 0 0 auto;
         height: auto;
         position: relative;
-        padding: 20px 15px;
-        min-height: 400px;
+        padding: 30px 15px;
+        min-height: auto;
         border-left: none;
         border-top: 1px solid #e0e0e0;
         order: 2;
@@ -216,8 +216,14 @@ body {
     }
     
     .building-visualization {
-        max-width: 320px;
+        max-width: 100%;
+        width: 100%;
+        max-width: min(380px, 90vw);
         margin: 0 auto;
+    }
+    
+    #buildingSvg {
+        max-width: 100%;
     }
 
     .building-intro-message {
@@ -294,6 +300,15 @@ body {
     min-height: 70vh;
     width: 100%;
     max-width: 640px;
+}
+
+/* Mobile - zmenšiť min-height */
+@media (max-width: 768px) {
+    .question.active {
+        min-height: auto;
+        justify-content: flex-start;
+        padding: 20px 0;
+    }
 }
 
 @keyframes slideIn {
@@ -666,20 +681,28 @@ body {
     }
 
     .content-side {
-        padding: 15px 10px 15px 10px;
+        padding: 10px 10px 10px 10px;
+        min-height: auto;
     }
 
     .content-side.full-width {
-        padding: 15px 10px 15px 10px;
+        padding: 10px 10px 10px 10px;
     }
 
     .building-side {
-        padding: 15px 10px;
-        min-height: 350px;
+        padding: 30px 10px;
+        min-height: auto;
     }
 
     .building-visualization {
-        max-width: 280px;
+        max-width: 100%;
+        max-width: min(350px, 90vw);
+    }
+    
+    #buildingSvg {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
     }
 
     .question-number {
