@@ -72,7 +72,7 @@ body {
 /* Building intro message */
 .building-intro-message {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     margin-top: 20px;
     padding: 0 20px;
     opacity: 0;
@@ -189,14 +189,14 @@ body {
     }
     
     .content-side {
-        padding: 20px 15px 20px 15px;
+        padding: 20px 15px 80px 15px;
         max-width: 100%;
         order: 1;
         flex: 1;
     }
 
     .content-side.full-width {
-        padding: 20px 15px 20px 15px;
+        padding: 20px 15px 80px 15px;
     }
     
     .building-side {
@@ -641,7 +641,7 @@ body {
 @media (max-width: 768px) {
     body {
         padding: 0;
-        padding-bottom: 80px;
+        padding-bottom: 0;
     }
 
     .container {
@@ -649,7 +649,7 @@ body {
     }
 
     .navigation {
-        position: fixed;
+        position: fixed !important;
         bottom: 0;
         left: 0;
         right: 0;
