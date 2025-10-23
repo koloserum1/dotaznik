@@ -1,18 +1,18 @@
-// Survey questions data
-const questions = [
-            {
-                number: 0,
-                title: "Nový branding Lýcea",
-                description: "",
-                type: "intro",
-                content: `Milí študenti, učitelia, rodičia a priatelia Lýcea,
+// Survey questions data - personalized flows based on role
+const commonQuestions = {
+    intro: {
+        number: 0,
+        title: "Nový branding Lýcea",
+        description: "",
+        type: "intro",
+        content: `Milí študenti, učitelia, rodičia a priatelia Lýcea,
 
 pracujeme na novej vizuálnej identite a webovej prezentácii školy.
 Chceme, aby Lýceum navonok vyzeralo tak, ako ho všetci reálne vnímame – ako moderné, otvorené a inšpiratívne miesto.
 
 Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou tejto zmeny. 💜`
-            },
-    {
+    },
+    role: {
         number: 1,
         title: "Aká je Vaša rola vo vzťahu k Lýceu?",
         description: "",
@@ -21,103 +21,273 @@ Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je an
         choices: [
             "študent",
             "učiteľ",
-            "rodič",
-            "sponzor/iný podporovateľ",
-            "absolvent",
-            "iné – uveďte"
+            "rodič"
+        ]
+    }
+};
+
+// Questions for students
+const studentQuestions = [
+    {
+        number: 2,
+        title: "Aký ste ročník?",
+        description: "",
+        type: "choice",
+        required: true,
+        choices: [
+            "1. ročník",
+            "2. ročník",
+            "3. ročník",
+            "4. ročník"
         ]
     },
     {
+        number: 3,
+        title: "Predstav si, že hovoríš s niekým, kto Lýceum nepozná. Ako by si v pár vetách opísal/a túto školu?",
+        description: "",
+        type: "textarea"
+    },
+    {
+        number: 4,
+        title: "Do akej miery máš pocit, že súčasná vizuálna identita a komunikácia Lýcea vystihujú, akou školou v skutočnosti sme?",
+        description: "",
+        type: "scale",
+        required: true,
+        scaleMin: 1,
+        scaleMax: 5,
+        scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"]
+    },
+    {
+        number: 5,
+        title: "Ktorá z týchto vizualizácií ti najviac evokuje Lýceum?",
+        description: "Vyber jeden obrázok, ktorý podľa teba najlepšie vystihuje školu",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+        ]
+    },
+    {
+        number: 6,
+        title: "Ktorá z týchto vizualizácií ti najmenej evokuje Lýceum?",
+        description: "Vyber jeden obrázok, ktorý sa k Lýceu vôbec nehodí",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+        ]
+    },
+    {
+        number: 7,
+        title: "Máš nejaký obrázok, logo alebo dizajn, ktorý ťa inšpiruje a mohol by byť pre Lýceum príkladom?",
+        description: "Pinterest, vlastná galéria, čokoľvek z internetu... Môžeš vložiť link",
+        type: "textarea"
+    },
+    {
+        number: 8,
+        title: "Predstav si, že o 5–10 rokov má Lýceum vynikajúcu povesť presne takú, akú by si si prial/a. Ako by sa o škole hovorilo? Aký imidž by mala mať?",
+        description: "",
+        type: "textarea"
+    },
+    {
+        number: 9,
+        title: "Ako často navštevuješ oficiálnu webovú stránku Lýcea a čo na nej považuješ za užitočné alebo vydarené?",
+        description: "",
+        type: "choice_with_textarea",
+        required: true,
+        choices: [
+            "Nikdy",
+            "Raz za čas (napr. kvôli oznamom)",
+            "Pravidelne (napr. kvôli rozvrhu, akciám...)",
+            "Často (je to môj hlavný zdroj informácií o škole)",
+            "iné – uveďte"
+        ],
+        textareaPrompt: "Čo na webe považuješ za užitočné alebo vydarené?"
+    },
+    {
+        number: 10,
+        title: "Chcel/a by si sa zapojiť do ďalšej diskusie o vizuálnej identite a komunikácii Lýcea?",
+        description: "Ak máš chuť pomôcť s tvorbou novej identity školy, budeme radi! Napíš sem, že máš záujem, alebo nám daj vedieť, že by si sa rád/rada stretol/a či porozprával/a.",
+        type: "textarea"
+    }
+];
+
+// Questions for teachers
+const teacherQuestions = [
+    {
         number: 2,
+        title: "Ako dlho pôsobíte na Lýceu?",
+        description: "",
+        type: "choice",
+        required: true,
+        choices: [
+            "Menej ako 1 rok",
+            "1–2 roky",
+            "3 roky",
+            "4+ roky"
+        ]
+    },
+    {
+        number: 3,
         title: "Predstavte si, že hovoríte s niekým, kto Lýceum nepozná. Ako by ste v pár vetách opísali túto školu?",
         description: "",
         type: "textarea"
     },
     {
-        number: 3,
-        title: "Ako veľmi sa stotožňujete s výrokom:",
-        description: "\"Vizuálna identita a komunikácia Lýcea dnes vystihuje, akou školou v skutočnosti sme.\"",
+        number: 4,
+        title: "Do akej miery máte pocit, že súčasná vizuálna identita a komunikácia Lýcea vystihujú, akou školou v skutočnosti sme?",
+        description: "",
         type: "scale",
         required: true,
         scaleMin: 1,
         scaleMax: 5,
-        scaleLabels: ["Vôbec nesúhlasím", "Úplne súhlasím"]
-    },
-    {
-        number: 4,
-        title: "Ktoré tri slová alebo vlastnosti podľa Vás najlepšie vystihujú Lýceum?",
-        description: "(Môžete uviesť 1–3 prívlastky alebo krátke slovné spojenia)",
-        type: "multiple_text",
-        required: true,
-        textFields: [
-            { label: "Slovo 1", required: true },
-            { label: "Slovo 2", required: false },
-            { label: "Slovo 3", required: false }
-        ]
+        scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"]
     },
     {
         number: 5,
-        title: "Čím je podľa Vás Lýceum výnimočné?",
-        description: "Prečo by si študenti alebo rodičia mali vybrať práve túto školu oproti iným?",
-        type: "textarea"
+        title: "Ktorá z týchto vizualizácií vám najviac evokuje Lýceum?",
+        description: "Vyber jeden obrázok, ktorý podľa vás najlepšie vystihuje školu",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+        ]
     },
     {
         number: 6,
-        title: "V čom vidíte najväčšie slabiny Lýcea alebo oblasti, ktoré by sa mali zlepšiť?",
-        description: "",
-        type: "textarea"
+        title: "Ktorá z týchto vizualizácií vám najmenej evokuje Lýceum?",
+        description: "Vyber jeden obrázok, ktorý sa k Lýceu vôbec nehodí",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+        ]
     },
     {
         number: 7,
-        title: "Predstavte si, že o 5–10 rokov má Lýceum výbornú povesť presne takú, akú by ste si priali. Aký imidž alebo reputáciu by v ideálnom prípade mala škola mať?",
-        description: "(Inými slovami: čím by ste chceli, aby bolo Lýceum známe?)",
+        title: "Aké hodnoty podľa vás najviac vystihujú Lýceum a jeho kultúru?",
+        description: "Môžete vybrať alebo dopísať vlastné – napr. sloboda, spolupráca, zvedavosť, autenticita...",
         type: "textarea"
     },
     {
         number: 8,
-        title: "Ako často a na aké účely navštevujete oficiálnu webovú stránku Lýcea?",
-        description: "",
-        type: "choice",
-        required: true,
-        choices: [
-            "Denne – potrebujem aktuálne info (rozvrh, aktuality, ...)",
-            "Niekoľkokrát do týždňa",
-            "Občas, len keď niečo konkrétne hľadám",
-            "Zriedka alebo vôbec",
-            "Nenavštevujem web, informácie získavam inde"
-        ]
+        title: "Ako sa podľa vás Lýceum odlišuje od iných škôl?",
+        description: "Čo robí školu rozpoznateľnou navonok",
+        type: "textarea"
     },
     {
         number: 9,
-        title: "Čo na súčasnej webovej stránke považujete za vydarené alebo užitočné?",
-        description: "(Je niečo, čo sa Vám na webe páči, dobre sa Vám používa alebo Vám to uľahčuje získavať informácie?)",
+        title: "Ak by sa Lýceum stalo \"značkou\" so svojou osobnosťou, aká by bola?",
+        description: "Prirovnanie k človeku, značke, charakteru",
         type: "textarea"
     },
     {
         number: 10,
-        title: "Ako by ste chceli, aby pôsobila nová vizuálna identita Lýcea?",
-        description: "Aký dojem alebo emóciu by mala vyvolávať?",
+        title: "Máte nejaký obrázok, logo alebo dizajn, ktorý vás inšpiruje a mohol by byť pre Lýceum príkladom?",
+        description: "Pinterest, vlastná galéria, internet – možnosť pridať odkaz",
         type: "textarea"
     },
     {
         number: 11,
-        title: "Máte predstavu alebo nápad, ako by mohlo vyzerať nové logo Lýcea?",
-        description: "(Čo by malo symbolizovať, aké prvky alebo farby by mohlo obsahovať?)",
+        title: "Ako by ste si predstavovali, že Lýceum komunikuje so svetom (študentmi, rodičmi, verejnosťou)?",
+        description: "Tón komunikácie – otvorený, odborný, priamy, ľudský...",
         type: "textarea"
     },
     {
         number: 12,
-        title: "Máte nejaký obrázok, logo alebo dizajn, ktorý vás inšpiruje a mohol by byť pre Lýceum príkladom?",
-        description: "(Môžete vložiť link na Google Drive, Dropbox alebo akúkoľvek URL obrázka)",
-        type: "textarea"
-    },
-    {
-        number: 13,
-        title: "Máte ešte nejaké ďalšie postrehy alebo nápady ohľadom značky, vizuálnej identity či komunikácie Lýcea, ktoré by ste nám chceli povedať?",
+        title: "Chceli by ste sa zapojiť do tvorby novej identity alebo byť súčasťou diskusie?",
         description: "",
         type: "textarea"
     }
 ];
+
+// Questions for parents
+const parentQuestions = [
+    {
+        number: 2,
+        title: "Koľko detí máte na Lýceu a v akom sú ročníku?",
+        description: "",
+        type: "textarea"
+    },
+    {
+        number: 3,
+        title: "Predstavte si, že hovoríte s niekým, kto Lýceum nepozná. Ako by ste v pár vetách opísali túto školu?",
+        description: "",
+        type: "textarea"
+    },
+    {
+        number: 4,
+        title: "Ako vaše deti hovoria o Lýceu?",
+        description: "Napr. čo im najviac páči, ako opisujú školu kamarátom alebo doma",
+        type: "textarea"
+    },
+    {
+        number: 5,
+        title: "Ako vy osobne vnímate Lýceum?",
+        description: "Napr. čo sa vám páči, čo by ste zlepšili, aký máte celkový dojem",
+        type: "textarea"
+    },
+    {
+        number: 6,
+        title: "Ktorá z týchto vizualizácií podľa vás najlepšie vystihuje Lýceum?",
+        description: "Vyber jeden obrázok – atmosféra školy, vzťahy, energia, nálada",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+        ]
+    },
+    {
+        number: 7,
+        title: "Ktorá z týchto vizualizácií podľa vás najviac nezodpovedá tomu, ako Lýceum vnímate?",
+        description: "Vyber jeden obrázok",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+        ]
+    },
+    {
+        number: 8,
+        title: "Čo by ste si priali, aby o Lýceu vedeli alebo vnímali ľudia mimo školy?",
+        description: "Ideálne z pohľadu reputácie a imidžu školy",
+        type: "textarea"
+    },
+    {
+        number: 9,
+        title: "Radi by ste sa zapojili do diskusie o novom vizuáli a značke Lýcea?",
+        description: "",
+        type: "textarea"
+    }
+];
+
+// Active questions array - will be populated based on user role
+let questions = [];
+let userRole = null;
 
 let currentQuestion = 0;
 let answers = {};
@@ -126,10 +296,139 @@ let sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 // Google Sheets Web App URL
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwlp_LoD1yVhP3oO6wa8RGnope0oOWptWYsLnDPJJlZjpkGv36TgGxlb0miBCWVWFI/exec';
 
+// Build questions array based on role
+function buildQuestionsForRole(role) {
+    questions = [commonQuestions.intro, commonQuestions.role];
+    
+    const roleChoice = typeof role === 'object' && role.choiceIndex !== undefined 
+        ? commonQuestions.role.choices[role.choiceIndex].toLowerCase()
+        : (typeof role === 'number' ? commonQuestions.role.choices[role].toLowerCase() : '');
+    
+    if (roleChoice.includes('študent')) {
+        questions = questions.concat(studentQuestions);
+        userRole = 'student';
+    } else if (roleChoice.includes('učiteľ')) {
+        questions = questions.concat(teacherQuestions);
+        userRole = 'teacher';
+    } else if (roleChoice.includes('rodič')) {
+        questions = questions.concat(parentQuestions);
+        userRole = 'parent';
+    } else {
+        // Default to student questions for other roles
+        questions = questions.concat(studentQuestions);
+        userRole = 'other';
+    }
+    
+    console.log('Questions built for role:', userRole, 'Total questions:', questions.length);
+}
+
+// Building visualization configuration - Variant 4: Simple Block
+const buildingParts = [
+    'block1',  // Foundation
+    'block2',  // Main building body
+    'block3',  // Window top left
+    'block4',  // Window top center
+    'block5',  // Window top right
+    'block6',  // Window bottom left
+    'block7',  // Window bottom right
+    'block8',  // Door
+    'block9',  // Door handle
+    'block10', // Roof base
+    'block11'  // Roof top
+];
+
+let buildingProgress = 0;
+let blocksPerQuestion = 1; // Will be calculated based on total questions
+
+// Building messages for different stages
+const buildingMessages = [
+    "Začíname budovať...",
+    "Kladieme základy...",
+    "Stavíme steny...",
+    "Pridávame okná...",
+    "Ďalšie okná...",
+    "Ešte viac okien...",
+    "Dokončujeme okná...",
+    "Pridávame dvere...",
+    "Detaily dverí...",
+    "Strecha...",
+    "Lýceum je hotové! 🎉"
+];
+
+// Add building part with animation - adds blocks based on question progress
+function addBuildingPart() {
+    // Calculate total questions (excluding intro, including role)
+    const totalQuestions = questions.filter(q => q.type !== 'intro').length;
+    const totalBlocks = buildingParts.length;
+    
+    // Distribute blocks evenly across questions
+    // We want the last block to be added with the last question
+    const blocksPerQuestion = totalBlocks / totalQuestions;
+    
+    // Calculate target progress based on current question (starting from question 1 = role)
+    // currentQuestion 1 = first real question (role selection)
+    const questionNumber = currentQuestion; // This is the question we just answered/passed
+    const targetProgress = Math.min(
+        Math.ceil(questionNumber * blocksPerQuestion),
+        totalBlocks
+    );
+    
+    // Add blocks up to target
+    while (buildingProgress < targetProgress && buildingProgress < totalBlocks) {
+        const partId = buildingParts[buildingProgress];
+        const part = document.getElementById(partId);
+        
+        if (part) {
+            const delay = (buildingProgress - (targetProgress - Math.ceil(blocksPerQuestion))) * 150;
+            // Add built class for animation with slight delay for each block
+            setTimeout(() => {
+                part.classList.add('built');
+                
+                // Show building visualization
+                const visualization = document.getElementById('buildingVisualization');
+                if (visualization) {
+                    visualization.classList.add('active');
+                }
+            }, Math.max(0, delay)); // Stagger animations by 150ms
+        }
+        
+        buildingProgress++;
+    }
+    
+    // Update message after all blocks are added
+    const messageIndex = Math.min(buildingProgress - 1, buildingMessages.length - 1);
+    updateBuildingMessage(buildingMessages[messageIndex]);
+    
+    console.log('Building progress:', buildingProgress, '/', totalBlocks, 'Question:', questionNumber, '/', totalQuestions);
+}
+
+// Update building message
+function updateBuildingMessage(message) {
+    const messageEl = document.getElementById('buildingMessage');
+    if (messageEl) {
+        const p = messageEl.querySelector('p');
+        if (p) {
+            p.textContent = message;
+        }
+        messageEl.classList.add('show');
+        
+        // Hide after 3 seconds
+        setTimeout(() => {
+            messageEl.classList.remove('show');
+        }, 3000);
+    }
+}
+
 // Initialize the survey
 function initSurvey() {
     // Load saved answers from localStorage
     loadSavedAnswers();
+    
+    // Start with common questions only
+    questions = [commonQuestions.intro, commonQuestions.role];
+    
+    // Initialize building visualization
+    initBuildingVisualization();
     
     renderQuestions();
     showQuestion(0);
@@ -138,6 +437,12 @@ function initSurvey() {
     
     // Auto-save every 10 seconds
     setInterval(saveToLocalStorage, 10000);
+}
+
+// Initialize building visualization
+function initBuildingVisualization() {
+    // Building starts empty, blocks will be added as user answers questions
+    console.log('Building visualization initialized');
 }
 
 // Load saved answers from localStorage
@@ -362,6 +667,65 @@ function renderQuestions() {
                 `;
             });
             contentHTML += '</div>';
+        } else if (q.type === 'image_choice') {
+            contentHTML += '<div class="image-choices">';
+            q.images.forEach((img, imgIndex) => {
+                contentHTML += `
+                    <div class="image-choice" onclick="selectImageChoice(${index}, ${imgIndex}, ${q.multiple || false})" data-img-id="${img.id}">
+                        <img src="${img.url}" alt="${img.label}">
+                        <button class="image-zoom-btn" onclick="event.stopPropagation(); openImageModal('${img.url}')" title="Zobraziť v plnom rozlíšení">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </button>
+                        <div class="image-choice-check">✓</div>
+                    </div>
+                `;
+            });
+            contentHTML += '</div>';
+        } else if (q.type === 'choice_with_textarea') {
+            contentHTML += '<div class="choices">';
+            q.choices.forEach((choice, choiceIndex) => {
+                const letter = String.fromCharCode(65 + choiceIndex);
+                const isOtherOption = choice.toLowerCase().includes('iné') || choice.toLowerCase().includes('uvede');
+                contentHTML += `
+                    <div class="choice" onclick="selectChoice(${index}, ${choiceIndex})" data-is-other="${isOtherOption}">
+                        <div class="choice-content">
+                            <span class="choice-letter">${letter}</span>
+                            <span>${choice}</span>
+                        </div>
+                        <div class="choice-close">✕</div>
+                    </div>
+                `;
+            });
+            contentHTML += '</div>';
+            
+            // Add text input for "other" option
+            contentHTML += `
+                <div class="other-input-container" id="other-input-${index}" style="display: none;">
+                    <input type="text" 
+                           class="text-input other-text-input" 
+                           id="other-text-${index}" 
+                           placeholder="Uveďte..."
+                           oninput="saveOtherText(${index})">
+                </div>
+            `;
+            
+            // Add textarea for additional comments
+            if (q.textareaPrompt) {
+                contentHTML += `
+                    <div class="textarea-section" style="margin-top: 20px;">
+                        <label class="text-field-label">${q.textareaPrompt}</label>
+                        <textarea class="textarea-input" 
+                                  id="textarea-${index}" 
+                                  placeholder="Type your answer here..."
+                                  oninput="saveChoiceTextarea(${index})"></textarea>
+                    </div>
+                `;
+            }
         }
 
         questionDiv.innerHTML = contentHTML;
@@ -380,13 +744,36 @@ function showQuestion(index) {
     // Hide/Show navigation based on question type
     const navigation = document.getElementById('navigation');
     const progressBar = document.getElementById('progressBar');
+    const buildingSide = document.getElementById('buildingSide');
+    const contentSide = document.querySelector('.content-side');
     
     if (questions[index].type === 'intro') {
+        // Intro screen: full width, no building side
         navigation.style.display = 'none';
         progressBar.style.display = 'none';
+        if (buildingSide) {
+            buildingSide.classList.remove('visible');
+        }
+        if (contentSide) {
+            contentSide.classList.add('full-width');
+        }
     } else {
+        // Regular questions: show navigation and building
         navigation.style.display = 'flex';
         progressBar.style.display = 'block';
+        
+        // Show building side starting from question 1 (role selection)
+        if (index >= 1 && buildingSide) {
+            // Delay to allow smooth transition
+            setTimeout(() => {
+                buildingSide.classList.add('visible');
+            }, 200);
+        }
+        
+        if (contentSide) {
+            // Smooth transition from full-width to normal
+            contentSide.classList.remove('full-width');
+        }
     }
 
     // Restore previous answer if exists
@@ -553,6 +940,60 @@ function saveMultipleTextAnswer(questionIndex, fieldIndex) {
     }, 2000);
 }
 
+// Select image choice
+function selectImageChoice(questionIndex, imgIndex, multiple) {
+    const imageChoices = document.querySelectorAll(`#question-${questionIndex} .image-choice`);
+    const selectedChoice = imageChoices[imgIndex];
+    
+    if (multiple) {
+        // Multiple selection mode
+        selectedChoice.classList.toggle('selected');
+        
+        // Save as array of selected indices
+        const selectedIndices = [];
+        imageChoices.forEach((choice, idx) => {
+            if (choice.classList.contains('selected')) {
+                selectedIndices.push(idx);
+            }
+        });
+        answers[questionIndex] = selectedIndices;
+    } else {
+        // Single selection mode
+        imageChoices.forEach(c => c.classList.remove('selected'));
+        selectedChoice.classList.add('selected');
+        answers[questionIndex] = imgIndex;
+    }
+    
+    // Save to localStorage immediately
+    saveToLocalStorage();
+    
+    // Save to Google Sheets in background
+    sendToGoogleSheets(false);
+}
+
+// Save choice with textarea answer
+function saveChoiceTextarea(questionIndex) {
+    const textarea = document.getElementById(`textarea-${questionIndex}`);
+    const currentAnswer = answers[questionIndex];
+    
+    // Store as object with both choice and textarea
+    if (typeof currentAnswer === 'object') {
+        currentAnswer.textareaText = textarea.value;
+    } else {
+        answers[questionIndex] = {
+            choiceIndex: currentAnswer,
+            textareaText: textarea.value
+        };
+    }
+    
+    // Debounced save
+    clearTimeout(window.saveTimeout);
+    window.saveTimeout = setTimeout(() => {
+        saveToLocalStorage();
+        sendToGoogleSheets(false);
+    }, 2000);
+}
+
 // Navigate to next question
 function nextQuestion() {
     // Check if current question is required and answered
@@ -560,6 +1001,20 @@ function nextQuestion() {
     if (currentQ.required && !isQuestionAnswered(currentQuestion)) {
         showRequiredError();
         return;
+    }
+    
+    // Special handling for role selection - rebuild questions FIRST
+    if (currentQuestion === 1 && answers[1] !== undefined) {
+        buildQuestionsForRole(answers[1]);
+        // Re-render all questions with new role-specific questions
+        renderQuestions();
+    }
+    
+    // Add building part when moving forward from questions (including role selection)
+    // Skip only intro (question 0)
+    // Add block even if question is not answered (optional questions)
+    if (currentQuestion >= 1) {
+        addBuildingPart();
     }
     
     if (currentQuestion < questions.length - 1) {
@@ -582,13 +1037,22 @@ function isQuestionAnswered(questionIndex) {
         return answer !== undefined && answer !== null;
     } else if (question.type === 'scale') {
         return answer !== undefined && answer !== null;
+    } else if (question.type === 'image_choice') {
+        // For image choice, answer is a number (index) or array of numbers
+        if (Array.isArray(answer)) {
+            return answer.length > 0;
+        }
+        return answer !== undefined && answer !== null && answer >= 0;
     } else if (question.type === 'multiple_text') {
         if (Array.isArray(answer)) {
             return answer.some(a => a && a.trim() !== '');
         }
         return false;
+    } else if (question.type === 'intro') {
+        return true; // Intro screens are always "answered"
     } else {
-        return answer !== undefined && answer !== null && answer.trim() !== '';
+        // For text/textarea types
+        return answer !== undefined && answer !== null && answer.toString().trim() !== '';
     }
 }
 
@@ -671,7 +1135,7 @@ function updateNavigation() {
 
     // Change next button text on last question
     if (currentQuestion === questions.length - 1) {
-        nextBtn.textContent = 'Odoslať ✓';
+        nextBtn.textContent = 'Pokračovať →';
     } else {
         nextBtn.textContent = 'Pokračovať →';
     }
@@ -687,10 +1151,13 @@ async function completeSurvey() {
     // Hide question container and navigation
     document.getElementById('questionContainer').style.display = 'none';
     document.getElementById('navigation').style.display = 'none';
+    document.getElementById('progressBar').style.display = 'none';
+    
+    // Show completion screen
     document.getElementById('completionScreen').classList.add('active');
     
     // Show loading
-    document.getElementById('loadingIndicator').style.display = 'block';
+    document.getElementById('loadingIndicator').style.display = 'flex';
     
     // Send to Google Sheets
     const success = await sendToGoogleSheets(true);
@@ -718,16 +1185,19 @@ async function completeSurvey() {
 function restartSurvey() {
     currentQuestion = 0;
     answers = {};
+    buildingProgress = 0; // Reset building progress
     sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     
     // Hide completion screens
     document.getElementById('completionScreen').classList.remove('active');
     document.getElementById('successMessage').style.display = 'none';
     document.getElementById('errorMessage').style.display = 'none';
+    document.getElementById('loadingIndicator').style.display = 'none';
     
     // Show question container and navigation
-    document.getElementById('questionContainer').style.display = 'block';
+    document.getElementById('questionContainer').style.display = 'flex';
     document.getElementById('navigation').style.display = 'flex';
+    document.getElementById('progressBar').style.display = 'block';
     
     initSurvey();
 }
@@ -766,4 +1236,32 @@ window.addEventListener('beforeunload', (e) => {
 
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', initSurvey);
+
+// Image modal functions
+function openImageModal(imageUrl) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    
+    if (modal && modalImg) {
+        modalImg.src = imageUrl;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeImageModal();
+    }
+});
 

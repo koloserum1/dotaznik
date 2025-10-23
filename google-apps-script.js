@@ -58,26 +58,79 @@ function doPost(e) {
       sheet = ss.insertSheet('Odpovede');
     }
     
-    // Always recreate headers to ensure they match current questions
-    const headers = [
+    // Detect user role from data
+    const roleAnswer = data.answers[1] || '';
+    let userRole = 'other';
+    
+    if (typeof roleAnswer === 'object' && roleAnswer.choiceIndex !== undefined) {
+      const roleChoices = ['študent', 'učiteľ', 'rodič', 'sponzor/iný podporovateľ', 'absolvent', 'iné'];
+      const roleText = roleChoices[roleAnswer.choiceIndex] || '';
+      if (roleText.includes('študent')) userRole = 'student';
+      else if (roleText.includes('učiteľ')) userRole = 'teacher';
+      else if (roleText.includes('rodič')) userRole = 'parent';
+    } else if (typeof roleAnswer === 'string') {
+      if (roleAnswer.includes('študent')) userRole = 'student';
+      else if (roleAnswer.includes('učiteľ')) userRole = 'teacher';
+      else if (roleAnswer.includes('rodič')) userRole = 'parent';
+    }
+    
+    // Create dynamic headers based on role
+    let headers = [
       'Timestamp',
       'Session ID',
-      'Je kompletné?',
-      'Q0: Nový branding (N/A)',
-      'Q1: Rola',
-      'Q2: Opis školy',
-      'Q3: Stotožnenie s vizuálom (1-5)',
-      'Q4: Tri slová ("|" separated)',
-      'Q5: Výnimočnosť',
-      'Q6: Slabiny',
-      'Q7: Imidž za 5-10 rokov',
-      'Q8: Návštevnosť webu',
-      'Q9: Čo je vydarené na webe',
-      'Q10: Nová vizuálna identita',
-      'Q11: Nápad na logo',
-      'Q12: Inšpiratívny dizajn (link)',
-      'Q13: Ďalšie postrehy'
+      'Rola',
+      'Je kompletné?'
     ];
+    
+    // Add role-specific headers
+    if (userRole === 'student') {
+      headers = headers.concat([
+        'Q2: Ročník',
+        'Q3: Opis školy',
+        'Q4: Stotožnenie s vizuálom (1-5)',
+        'Q5: Vizualizácie - najviac evokujú',
+        'Q6: Vizualizácie - najmenej evokujú',
+        'Q7: Inšpiratívny dizajn (link)',
+        'Q8: Imidž za 5-10 rokov',
+        'Q9: Návštevnosť webu + užitočnosť',
+        'Q10: Zapojenie do diskusie'
+      ]);
+    } else if (userRole === 'teacher') {
+      headers = headers.concat([
+        'Q2: Ako dlho pôsobíte',
+        'Q3: Opis školy',
+        'Q4: Hodnoty Lýcea',
+        'Q5: Typický lýceista',
+        'Q6: Odlišnosti od iných škôl',
+        'Q7: Lýceum ako značka',
+        'Q8: Komunikácia so svetom',
+        'Q9: Zapojenie do diskusie'
+      ]);
+    } else if (userRole === 'parent') {
+      headers = headers.concat([
+        'Q2: Počet detí a ročníky',
+        'Q3: Opis školy',
+        'Q4: Ako deti hovoria o Lýceu',
+        'Q5: Ako vy vnímate Lýceum',
+        'Q6: Vizualizácie - najlepšie vystihuje',
+        'Q7: Vizualizácie - nezodpovedá',
+        'Q8: Čo by ľudia mali vedieť',
+        'Q9: Zapojenie do diskusie'
+      ]);
+    } else {
+      // Default headers for other roles
+      headers = headers.concat([
+        'Q2+: Odpovede',
+        'Q3+: Odpovede',
+        'Q4+: Odpovede',
+        'Q5+: Odpovede',
+        'Q6+: Odpovede',
+        'Q7+: Odpovede',
+        'Q8+: Odpovede',
+        'Q9+: Odpovede',
+        'Q10+: Odpovede'
+      ]);
+    }
     
     let lastRow = sheet.getLastRow();
     
@@ -121,12 +174,54 @@ function doPost(e) {
       }
     }
     
-    // Prepare row data
+    // Prepare row data - format answers properly
+    const formattedAnswers = data.answers.map((answer, index) => {
+      if (answer === undefined || answer === null || answer === '') {
+        return '';
+      }
+      
+      // Handle different answer types
+      if (typeof answer === 'object') {
+        // Handle choice with "other" text
+        if (answer.choiceIndex !== undefined) {
+          return answer.otherText || answer.choiceIndex.toString();
+        }
+        // Handle choice with textarea
+        if (answer.textareaText !== undefined) {
+          return `${answer.choiceIndex}: ${answer.textareaText}`;
+        }
+      }
+      
+      // Handle array answers (image choices, multiple selections)
+      if (Array.isArray(answer)) {
+        return answer.filter(a => a !== undefined && a !== null && a !== '').join(' | ');
+      }
+      
+      return answer.toString();
+    });
+    
+    // Extract role answer for the separate role column
+    let roleText = '';
+    const roleAnswer = data.answers[1];
+    if (typeof roleAnswer === 'object' && roleAnswer.choiceIndex !== undefined) {
+      const roleChoices = ['študent', 'učiteľ', 'rodič', 'sponzor/iný podporovateľ', 'absolvent', 'iné'];
+      roleText = roleChoices[roleAnswer.choiceIndex] || '';
+      if (roleAnswer.otherText) {
+        roleText += ': ' + roleAnswer.otherText;
+      }
+    } else if (typeof roleAnswer === 'string') {
+      roleText = roleAnswer;
+    }
+    
+    // Skip intro (index 0) and role (index 1) from formatted answers
+    const answersWithoutIntroAndRole = formattedAnswers.slice(2);
+    
     const rowData = [
       data.timestamp,
       data.sessionId,
+      roleText,
       data.isComplete ? 'Áno' : 'Nie',
-      ...data.answers
+      ...answersWithoutIntroAndRole
     ];
     
     Logger.log('Row data prepared: ' + rowData.length + ' columns');

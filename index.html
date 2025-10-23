@@ -7,27 +7,29 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="progress-bar" id="progressBar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-        
-        <div class="question-container" id="questionContainer">
-            <!-- Questions will be rendered here -->
-        </div>
+    <div class="progress-bar" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <div class="main-layout">
+        <!-- Left side - Questions -->
+        <div class="content-side">
+            <div class="question-container" id="questionContainer">
+                <!-- Questions will be rendered here -->
+            </div>
+            
+            <div class="navigation" id="navigation">
+                <button class="nav-button" id="prevBtn" onclick="previousQuestion()">
+                    ← Späť
+                </button>
+                <div class="question-counter" id="questionCounter"></div>
+                <button class="nav-button primary" id="nextBtn" onclick="nextQuestion()">
+                    Pokračovať →
+                </button>
+            </div>
 
-        <div class="navigation" id="navigation">
-            <button class="nav-button" id="prevBtn" onclick="previousQuestion()">
-                ← Späť
-            </button>
-            <div class="question-counter" id="questionCounter"></div>
-            <button class="nav-button primary" id="nextBtn" onclick="nextQuestion()">
-                Pokračovať →
-            </button>
-        </div>
-
-        <div class="completion-screen" id="completionScreen">
-            <div class="completion-content">
+            <!-- Completion Screen -->
+            <div class="completion-screen" id="completionScreen">
                 <div class="loading" id="loadingIndicator" style="display: none;">
                     <div class="spinner"></div>
                     <p>Odosielam odpovede...</p>
@@ -41,6 +43,75 @@
                     <p>Vaše odpovede sú uložené lokálne. Skúsime ich odoslať automaticky.</p>
                 </div>
             </div>
+        </div>
+        
+        <!-- Right side - Building Visualization -->
+        <div class="building-side" id="buildingSide">
+            <div class="building-intro-message" id="buildingIntroMessage">
+                <h2>Stavajme Lýceum spolu</h2>
+                <p>S každou vašou odpoveďou vyrastá nová budova. Sledujte, ako sa vaše názory menia na realitu našej školy. 💙</p>
+            </div>
+            <div class="building-visualization" id="buildingVisualization">
+                <svg id="buildingSvg" viewBox="0 0 450 550" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Variant 4: Simple Block - Minimalist -->
+                    
+                    <!-- Block 1: Foundation -->
+                    <rect id="block1" class="building-block" x="140" y="500" width="170" height="15" 
+                          fill="white" stroke="#1967d2" stroke-width="3" rx="8" opacity="0"/>
+                    
+                    <!-- Block 2: Main building body -->
+                    <rect id="block2" class="building-block" x="125" y="370" width="200" height="130" 
+                          fill="white" stroke="#1967d2" stroke-width="4" rx="15" opacity="0"/>
+                    
+                    <!-- Block 3: Window top left -->
+                    <rect id="block3" class="building-block" x="150" y="400" width="40" height="35" 
+                          fill="#1967d2" rx="8" opacity="0"/>
+                    
+                    <!-- Block 4: Window top center -->
+                    <rect id="block4" class="building-block" x="200" y="400" width="40" height="35" 
+                          fill="#1967d2" rx="8" opacity="0"/>
+                    
+                    <!-- Block 5: Window top right -->
+                    <rect id="block5" class="building-block" x="250" y="400" width="40" height="35" 
+                          fill="#1967d2" rx="8" opacity="0"/>
+                    
+                    <!-- Block 6: Window bottom left -->
+                    <rect id="block6" class="building-block" x="150" y="450" width="40" height="35" 
+                          fill="#1967d2" rx="8" opacity="0"/>
+                    
+                    <!-- Block 7: Window bottom right -->
+                    <rect id="block7" class="building-block" x="250" y="450" width="40" height="35" 
+                          fill="#1967d2" rx="8" opacity="0"/>
+                    
+                    <!-- Block 8: Door (center bottom) -->
+                    <rect id="block8" class="building-block" x="200" y="460" width="40" height="40" 
+                          fill="#1967d2" rx="8" opacity="0"/>
+                    
+                    <!-- Block 9: Door handle -->
+                    <circle id="block9" class="building-block" cx="230" cy="480" r="4" 
+                            fill="white" opacity="0"/>
+                    
+                    <!-- Block 10: Roof base -->
+                    <rect id="block10" class="building-block" x="110" y="350" width="230" height="20" 
+                          fill="white" stroke="#1967d2" stroke-width="3" rx="10" opacity="0"/>
+                    
+                    <!-- Block 11: Roof top -->
+                    <rect id="block11" class="building-block" x="190" y="320" width="70" height="30" 
+                          fill="#1967d2" rx="10" opacity="0"/>
+                </svg>
+                
+                <div class="building-message" id="buildingMessage">
+                    <p>Budujeme Lýceum...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+        <div class="image-modal-content">
+            <span class="image-modal-close">&times;</span>
+            <img id="modalImage" src="" alt="Obrázok v plnom rozlíšení">
         </div>
     </div>
 

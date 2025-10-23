@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lýceum - Náhľad Budovy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #1967d2;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            color: #5f6368;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .building-wrapper {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .controls {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        button {
+            background: #1967d2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #1557b0;
+        }
+
+        button.secondary {
+            background: white;
+            color: #1967d2;
+            border: 2px solid #1967d2;
+        }
+
+        button.secondary:hover {
+            background: #e8f0fe;
+        }
+
+        .info {
+            background: #e8f0fe;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .info h3 {
+            color: #1967d2;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .info ul {
+            list-style: none;
+            color: #5f6368;
+            font-size: 14px;
+        }
+
+        .info li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info li:before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: #1967d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏫 Náhľad Finálnej Budovy Lýcea</h1>
+        <p>Minimalistický dizajn s modrými obdĺžnikmi a zaoblenými rohmi</p>
+
+        <div class="building-wrapper">
+            <svg id="buildingSvg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                <!-- Minimalist building blocks - ALL VISIBLE -->
+                
+                <!-- Block 1: Foundation -->
+                <rect id="block1" x="150" y="460" width="100" height="15" 
+                      fill="white" stroke="#1967d2" stroke-width="3" rx="6" opacity="1"/>
+                
+                <!-- Block 2: Base floor -->
+                <rect id="block2" x="130" y="420" width="140" height="40" 
+                      fill="white" stroke="#1967d2" stroke-width="3" rx="8" opacity="1"/>
+                
+                <!-- Block 3: Window 1 -->
+                <rect id="block3" x="150" y="435" width="30" height="20" 
+                      fill="#1967d2" rx="4" opacity="1"/>
+                
+                <!-- Block 4: Window 2 -->
+                <rect id="block4" x="220" y="435" width="30" height="20" 
+                      fill="#1967d2" rx="4" opacity="1"/>
+                
+                <!-- Block 5: Second floor -->
+                <rect id="block5" x="130" y="370" width="140" height="50" 
+                      fill="white" stroke="#1967d2" stroke-width="3" rx="8" opacity="1"/>
+                
+                <!-- Block 6: Window 3 -->
+                <rect id="block6" x="150" y="390" width="30" height="20" 
+                      fill="#1967d2" rx="4" opacity="1"/>
+                
+                <!-- Block 7: Window 4 -->
+                <rect id="block7" x="220" y="390" width="30" height="20" 
+                      fill="#1967d2" rx="4" opacity="1"/>
+                
+                <!-- Block 8: Third floor -->
+                <rect id="block8" x="130" y="320" width="140" height="50" 
+                      fill="white" stroke="#1967d2" stroke-width="3" rx="8" opacity="1"/>
+                
+                <!-- Block 9: Window 5 -->
+                <rect id="block9" x="150" y="340" width="30" height="20" 
+                      fill="#1967d2" rx="4" opacity="1"/>
+                
+                <!-- Block 10: Window 6 -->
+                <rect id="block10" x="220" y="340" width="30" height="20" 
+                      fill="#1967d2" rx="4" opacity="1"/>
+                
+                <!-- Block 11: Roof base -->
+                <rect id="block11" x="120" y="300" width="160" height="20" 
+                      fill="white" stroke="#1967d2" stroke-width="3" rx="8" opacity="1"/>
+                
+                <!-- Block 12: Roof top -->
+                <rect id="block12" x="160" y="280" width="80" height="20" 
+                      fill="#1967d2" rx="8" opacity="1"/>
+                
+                <!-- Block 13: Door -->
+                <rect id="block13" x="185" y="440" width="30" height="35" 
+                      fill="#1967d2" rx="4" opacity="1"/>
+                
+                <!-- Block 14: Door handle -->
+                <circle id="block14" cx="207" cy="458" r="3" 
+                        fill="white" opacity="1"/>
+                
+                <!-- Block 15: Sign -->
+                <rect id="block15" x="160" y="310" width="80" height="8" 
+                      fill="#1967d2" rx="4" opacity="1"/>
+            </svg>
+        </div>
+
+        <div class="info">
+            <h3>📋 Detaily dizajnu:</h3>
+            <ul>
+                <li>15 blokov celkovo</li>
+                <li>3 poschodia budovy</li>
+                <li>6 okien (modré obdĺžniky)</li>
+                <li>Dvere s kľučkou</li>
+                <li>Strecha s vrcholom</li>
+                <li>Značka/nápis</li>
+                <li>Farby: Modrá (#1967d2) + Biela</li>
+                <li>Všetky rohy zaoblené</li>
+            </ul>
+        </div>
+
+        <div class="controls">
+            <button class="secondary" onclick="window.location.href='building-variants.html'">
+                Ukáž varianty →
+            </button>
+            <button onclick="window.location.href='index.html'">
+                Použiť tento dizajn ✓
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Optional: Add hover effect to show block numbers
+        document.querySelectorAll('rect, circle').forEach((block, index) => {
+            block.addEventListener('mouseenter', function() {
+                console.log(`Block ${index + 1}: ${this.id}`);
+                this.style.filter = 'brightness(1.2)';
+            });
+            block.addEventListener('mouseleave', function() {
+                this.style.filter = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+
