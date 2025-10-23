@@ -327,7 +327,7 @@ body {
     .question.active {
         min-height: auto;
         justify-content: flex-start;
-        padding: 20px 0;
+        padding: 10px 0 0 0;
     }
 }
 
@@ -375,7 +375,7 @@ body {
 .question-description {
     font-size: 14px;
     color: #5f6368;
-    margin-bottom: 30px;
+    margin-bottom: 18px;
     font-style: italic;
     display: block;
     margin-top: 6px;
@@ -385,13 +385,13 @@ body {
 .choices {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
     max-width: 640px;
     overflow-y: auto;
-    max-height: 50vh;
+    max-height: 52vh;
     padding-right: 5px;
-    margin-top: 24px;
+    margin-top: 12px;
 }
 
 .choices::-webkit-scrollbar {
@@ -653,6 +653,11 @@ body {
 }
 
 @media (max-width: 768px) {
+    .question-container {
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+
     body {
         padding: 0;
         padding-bottom: 0;
