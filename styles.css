@@ -190,14 +190,14 @@ body {
     }
     
     .content-side {
-        padding: 20px 15px 55px 15px;
+        padding: 20px 15px 5px 15px;
         max-width: 100%;
         order: 1;
         flex: 1;
     }
 
     .content-side.full-width {
-        padding: 20px 15px 55px 15px;
+        padding: 20px 15px 5px 15px;
     }
     
     .building-side {
@@ -211,7 +211,7 @@ body {
         order: 2;
         width: 100%;
         background: white;
-        margin-top: -40px;
+        margin-top: 0px;
     }
 
     .building-side.visible {
@@ -228,7 +228,7 @@ body {
         width: 100%;
         max-width: min(360px, 85vw);
         margin: 0 auto;
-        margin-top: -15px;
+        margin-top: 0px;
     }
     
     #buildingSvg {
@@ -237,7 +237,7 @@ body {
 
     .building-intro-message {
         margin-bottom: 0px;
-        margin-top: -5px;
+        margin-top: 0px;
         padding-bottom: 0;
         padding-top: 0;
     }
@@ -247,6 +247,7 @@ body {
         margin-bottom: 0px;
         padding-bottom: 0;
         line-height: 1.2;
+        margin-top: 0;
     }
 
     .building-intro-message p {
@@ -254,11 +255,12 @@ body {
         margin-bottom: 0px;
         padding-bottom: 0;
         line-height: 1.4;
+        margin-top: 0;
     }
     
     .navigation {
         padding: 0 5px;
-        margin-top: 20px;
+        margin-top: 5px;
     }
 }
 
@@ -709,7 +711,7 @@ body {
     }
 
     .content-side {
-        padding: 10px 10px 55px 10px;
+        padding: 10px 10px 5px 10px;
         min-height: auto;
     }
 
@@ -724,14 +726,14 @@ body {
     .building-side {
         padding: 0px 10px 5px 10px;
         min-height: auto;
-        margin-top: -40px;
+        margin-top: 0px;
         border-top: none;
     }
 
     .building-visualization {
         max-width: 100%;
         max-width: min(330px, 85vw);
-        margin-top: -15px;
+        margin-top: 0px;
     }
     
     #buildingSvg {
@@ -770,8 +772,8 @@ body {
         max-width: 100%;
         gap: 8px;
         max-height: 55vh;
-        margin-top: 16px;
-        margin-bottom: 0;
+        margin-top: 10px;
+        margin-bottom: 5px;
     }
 
     .choice {
