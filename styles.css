@@ -190,28 +190,28 @@ body {
     }
     
     .content-side {
-        padding: 20px 15px 5px 15px;
+        padding: 0 12px 0 12px;
         max-width: 100%;
         order: 1;
         flex: 1;
     }
 
     .content-side.full-width {
-        padding: 20px 15px 5px 15px;
+        padding: 0 12px 0 12px;
     }
     
     .building-side {
         flex: 0 0 auto;
         height: auto;
         position: relative;
-        padding: 0px 15px 5px 15px;
+        padding: 0 12px 5px 12px;
         min-height: auto;
         border-left: none;
         border-top: none;
         order: 2;
         width: 100%;
         background: white;
-        margin-top: 0px;
+        margin-top: -10px;
     }
 
     .building-side.visible {
@@ -228,7 +228,7 @@ body {
         width: 100%;
         max-width: min(360px, 85vw);
         margin: 0 auto;
-        margin-top: 0px;
+        margin-top: -5px;
     }
     
     #buildingSvg {
@@ -716,7 +716,7 @@ body {
     }
 
     .content-side {
-        padding: 10px 10px 5px 10px;
+        padding: 0 10px 0 10px;
         min-height: auto;
     }
 
@@ -729,16 +729,16 @@ body {
     }
 
     .building-side {
-        padding: 0px 10px 5px 10px;
+        padding: 0 10px 4px 10px;
         min-height: auto;
-        margin-top: 0px;
+        margin-top: -10px;
         border-top: none;
     }
 
     .building-visualization {
         max-width: 100%;
         max-width: min(330px, 85vw);
-        margin-top: 0px;
+        margin-top: -6px;
     }
     
     #buildingSvg {
