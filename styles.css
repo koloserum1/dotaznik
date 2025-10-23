@@ -230,7 +230,7 @@ body {
         width: 100%;
         max-width: min(360px, 85vw);
         margin: 0 auto;
-        margin-top: -5px;
+        margin-top: -14px;
     }
     
     #buildingSvg {
@@ -743,7 +743,7 @@ body {
     .building-visualization {
         max-width: 100%;
         max-width: min(330px, 85vw);
-        margin-top: 0;
+        margin-top: -10px;
     }
     
     #buildingSvg {

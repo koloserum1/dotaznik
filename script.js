@@ -625,7 +625,7 @@ function renderQuestions() {
                        id="input-${index}" 
                        placeholder="Type your answer here..."
                        oninput="saveTextAnswer(${index})">
-                <div class="input-hint">Shift ⇧ + Enter ↵ to make a line break</div>
+                <div class="input-hint" style="display:none"></div>
             `;
         } else if (q.type === 'textarea') {
             contentHTML += `
@@ -633,7 +633,7 @@ function renderQuestions() {
                           id="input-${index}" 
                           placeholder="Type your answer here..."
                           oninput="saveTextAnswer(${index})"></textarea>
-                <div class="input-hint">Shift ⇧ + Enter ↵ to make a line break</div>
+                <div class="input-hint" style="display:none"></div>
             `;
         } else if (q.type === 'scale') {
             contentHTML += '<div class="scale-container">';
