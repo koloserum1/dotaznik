@@ -116,6 +116,7 @@ body {
     opacity: 0;
     transform: scale(0.95);
     animation: scaleIn 1s ease 0.7s both;
+    margin-top: 0;
 }
 
 @keyframes scaleIn {
@@ -137,7 +138,7 @@ body {
 
 .building-message {
     text-align: center;
-    margin-top: 24px;
+    margin-top: 10px;
     opacity: 0;
     transition: opacity 0.5s ease;
     min-height: 30px;
@@ -189,21 +190,21 @@ body {
     }
     
     .content-side {
-        padding: 20px 15px 65px 15px;
+        padding: 20px 15px 60px 15px;
         max-width: 100%;
         order: 1;
         flex: 1;
     }
 
     .content-side.full-width {
-        padding: 20px 15px 65px 15px;
+        padding: 20px 15px 60px 15px;
     }
     
     .building-side {
         flex: 0 0 auto;
         height: auto;
         position: relative;
-        padding: 5px 15px 10px 15px;
+        padding: 3px 15px 8px 15px;
         min-height: auto;
         border-left: none;
         border-top: 1px solid #e0e0e0;
@@ -226,7 +227,7 @@ body {
         width: 100%;
         max-width: min(380px, 90vw);
         margin: 0 auto;
-        margin-top: 0;
+        margin-top: -5px;
     }
     
     #buildingSvg {
@@ -703,7 +704,7 @@ body {
     }
 
     .content-side {
-        padding: 10px 10px 65px 10px;
+        padding: 10px 10px 60px 10px;
         min-height: auto;
     }
 
@@ -716,14 +717,14 @@ body {
     }
 
     .building-side {
-        padding: 5px 10px 10px 10px;
+        padding: 3px 10px 8px 10px;
         min-height: auto;
     }
 
     .building-visualization {
         max-width: 100%;
         max-width: min(350px, 90vw);
-        margin-top: 0;
+        margin-top: -5px;
     }
     
     #buildingSvg {
