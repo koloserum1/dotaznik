@@ -781,13 +781,13 @@ function showQuestion(index) {
         buildingSide.classList.add('visible');
     }
     
-    // Hide building intro message from question 2 onwards
-    const buildingIntroMessage = document.getElementById('buildingIntroMessage');
-    if (buildingIntroMessage) {
+    // Hide building intro text (not the title) from question 2 onwards
+    const buildingIntroText = document.getElementById('buildingIntroText');
+    if (buildingIntroText) {
         if (index >= 2) {
-            buildingIntroMessage.style.display = 'none';
+            buildingIntroText.style.display = 'none';
         } else {
-            buildingIntroMessage.style.display = 'block';
+            buildingIntroText.style.display = 'block';
         }
     }
 

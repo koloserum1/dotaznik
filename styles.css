@@ -72,7 +72,7 @@ body {
 /* Building intro message */
 .building-intro-message {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-top: 20px;
     padding: 0 20px;
     opacity: 0;
@@ -95,9 +95,17 @@ body {
     font-size: 24px;
     color: #1967d2;
     font-weight: 600;
-    margin-bottom: 0;
+    margin-bottom: 16px;
     letter-spacing: -0.5px;
     line-height: 1.3;
+}
+
+.building-intro-message p {
+    font-size: 16px;
+    color: #5f6368;
+    line-height: 1.6;
+    max-width: 320px;
+    margin: 0 auto;
 }
 
 /* Building Visualization Styles */
