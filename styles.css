@@ -72,8 +72,8 @@ body {
 /* Building intro message */
 .building-intro-message {
     text-align: center;
-    margin-bottom: 30px;
-    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-top: 20px;
     padding: 0 20px;
     opacity: 0;
     transform: translateY(20px);

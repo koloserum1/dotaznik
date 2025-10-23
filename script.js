@@ -780,6 +780,16 @@ function showQuestion(index) {
     if (index >= 1 && buildingSide && window.innerWidth <= 1024) {
         buildingSide.classList.add('visible');
     }
+    
+    // Hide building intro message from question 2 onwards
+    const buildingIntroMessage = document.getElementById('buildingIntroMessage');
+    if (buildingIntroMessage) {
+        if (index >= 2) {
+            buildingIntroMessage.style.display = 'none';
+        } else {
+            buildingIntroMessage.style.display = 'block';
+        }
+    }
 
     // Restore previous answer if exists
     if (answers[index] !== undefined && answers[index] !== null) {
