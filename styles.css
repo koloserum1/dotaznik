@@ -190,27 +190,28 @@ body {
     }
     
     .content-side {
-        padding: 20px 15px 60px 15px;
+        padding: 20px 15px 55px 15px;
         max-width: 100%;
         order: 1;
         flex: 1;
     }
 
     .content-side.full-width {
-        padding: 20px 15px 60px 15px;
+        padding: 20px 15px 55px 15px;
     }
     
     .building-side {
         flex: 0 0 auto;
         height: auto;
         position: relative;
-        padding: 3px 15px 8px 15px;
+        padding: 0px 15px 8px 15px;
         min-height: auto;
         border-left: none;
-        border-top: 1px solid #e0e0e0;
+        border-top: none;
         order: 2;
         width: 100%;
         background: white;
+        margin-top: -30px;
     }
 
     .building-side.visible {
@@ -227,7 +228,7 @@ body {
         width: 100%;
         max-width: min(380px, 90vw);
         margin: 0 auto;
-        margin-top: -5px;
+        margin-top: -10px;
     }
     
     #buildingSvg {
@@ -254,6 +255,7 @@ body {
     
     .navigation {
         padding: 0 5px;
+        margin-top: 20px;
     }
 }
 
@@ -704,7 +706,7 @@ body {
     }
 
     .content-side {
-        padding: 10px 10px 60px 10px;
+        padding: 10px 10px 55px 10px;
         min-height: auto;
     }
 
@@ -717,14 +719,16 @@ body {
     }
 
     .building-side {
-        padding: 3px 10px 8px 10px;
+        padding: 0px 10px 8px 10px;
         min-height: auto;
+        margin-top: -30px;
+        border-top: none;
     }
 
     .building-visualization {
         max-width: 100%;
         max-width: min(350px, 90vw);
-        margin-top: -5px;
+        margin-top: -10px;
     }
     
     #buildingSvg {
@@ -753,6 +757,8 @@ body {
         max-width: 100%;
         gap: 8px;
         max-height: 55vh;
+        margin-top: 16px;
+        margin-bottom: 0;
     }
 
     .choice {
