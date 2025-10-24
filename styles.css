@@ -12,6 +12,43 @@ body {
     overflow-x: hidden;
 }
 
+/* Language Toggle */
+.language-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.lang-btn {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    margin: 2px;
+}
+
+.lang-btn.active {
+    background: #1967d2;
+    color: white;
+    box-shadow: 0 2px 8px rgba(25, 103, 210, 0.3);
+}
+
+.lang-btn:hover:not(.active) {
+    background: #f0f0f0;
+    color: #333;
+}
+
 /* Main Layout - Side by Side */
 .main-layout {
     display: flex;
