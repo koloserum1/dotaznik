@@ -1,7 +1,18 @@
 // Survey questions data - personalized flows based on role
 const commonQuestions = {
-    intro: {
+    language: {
         number: 0,
+        title: "Vyberte jazyk / Choose language",
+        description: "",
+        type: "choice",
+        required: true,
+        choices: [
+            "Slovenčina",
+            "English"
+        ]
+    },
+    intro: {
+        number: 1,
         title: "Nový branding Lýcea",
         description: "",
         type: "intro",
@@ -11,7 +22,7 @@ Chceme zistiť, ako Lýceum reálne vnímate – čo pre vás znamená, ako pôs
 Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou tejto zmeny. 💜`
     },
     role: {
-        number: 1,
+        number: 2,
         title: "Aká je Vaša rola vo vzťahu k Lýceu?",
         description: "",
         type: "choice",
@@ -27,7 +38,7 @@ Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou
 // Questions for students
 const studentQuestions = [
     {
-        number: 2,
+        number: 3,
         title: "Aký si ročník?",
         description: "",
         type: "choice",
@@ -40,7 +51,7 @@ const studentQuestions = [
         ]
     },
     {
-        number: 3,
+        number: 4,
         title: "Máš pocit, že súčasná vizuálna identita Lýcea vystihuje, akí naozaj sme?",
         description: "",
         type: "scale",
@@ -50,23 +61,9 @@ const studentQuestions = [
         scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"]
     },
     {
-        number: 4,
-        title: "Predstav si, že budúci rok má škola nový vizuál. Ktorý podľa teba NAJVIAC vystihuje Lýceum?",
-        description: "Vyber zo 4 obrázkov",
-        type: "image_choice",
-        required: false,
-        multiple: false,
-        images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
-        ]
-    },
-    {
         number: 5,
-        title: "A opačne, ktorý podľa teba NAJMENEJ vystihuje Lýceum?",
-        description: "Vyber zo 4 obrázkov",
+        title: "Predstav si, že budúci rok má škola nový vizuál. Ktorý podľa teba NAJVIAC vystihuje Lýceum?",
+        description: "Vyber 1 z 4 obrázkov",
         type: "image_choice",
         required: false,
         multiple: false,
@@ -79,24 +76,38 @@ const studentQuestions = [
     },
     {
         number: 6,
+        title: "A opačne, ktorý podľa teba NAJMENEJ vystihuje Lýceum?",
+        description: "Vyber 1 z 4 obrázkov",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
+        ]
+    },
+    {
+        number: 7,
         title: "Poznáš vizuál, dizajn, značku alebo školu, ktorá ťa inšpiruje a mohla by byť príkladom pre Lýceum?",
         description: "Môžeš pridať odkaz – napríklad z Pinterestu alebo webu",
         type: "textarea"
     },
     {
-        number: 7,
+        number: 8,
         title: "Predstav si, že o 5–10 rokov má Lýceum vynikajúcu povesť – presne takú, akú by si si prial/a. Ako by sa o tejto škole hovorilo? Aký imidž by mala mať?",
         description: "",
         type: "textarea"
     },
     {
-        number: 8,
+        number: 9,
         title: "Rozprávaš sa s niekým, kto Lýceum nepozná. Ako by si v pár vetách opísal/a túto školu?",
         description: "",
         type: "textarea"
     },
     {
-        number: 9,
+        number: 10,
         title: "Ako často navštevuješ webstránku Lýcea?",
         description: "",
         type: "choice",
@@ -110,19 +121,19 @@ const studentQuestions = [
         ]
     },
     {
-        number: 10,
+        number: 11,
         title: "Čo na webstránke Lýcea považuješ za užitočné alebo vydarené?",
         description: "",
         type: "textarea"
     },
     {
-        number: 11,
+        number: 12,
         title: "Keby bolo Lýceum človek, zviera alebo značka – aké by bolo?",
         description: "Skús ho opísať niekoľkými slovami – aký má charakter, štýl, energiu alebo správanie.",
         type: "textarea"
     },
     {
-        number: 12,
+        number: 13,
         title: "Môžeme sa ti ozvať, keď budeme pokračovať v téme vizuálu Lýcea?",
         description: "Napíš meno alebo e-mail",
         type: "textarea"
@@ -132,7 +143,7 @@ const studentQuestions = [
 // Questions for teachers
 const teacherQuestions = [
     {
-        number: 2,
+        number: 3,
         title: "Ako dlho pôsobíte na Lýceu?",
         description: "",
         type: "choice",
@@ -145,7 +156,7 @@ const teacherQuestions = [
         ]
     },
     {
-        number: 3,
+        number: 4,
         title: "Máte pocit, že súčasná vizuálna identita Lýcea vystihuje, akí naozaj sme?",
         description: "",
         type: "scale",
@@ -155,23 +166,9 @@ const teacherQuestions = [
         scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"]
     },
     {
-        number: 4,
-        title: "Predstavte si, že budúci rok má škola nový vizuál. Ktorý podľa vás NAJVIAC vystihuje Lýceum?",
-        description: "Vyber zo 4 obrázkov",
-        type: "image_choice",
-        required: false,
-        multiple: false,
-        images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
-        ]
-    },
-    {
         number: 5,
-        title: "A opačne, ktorý podľa vás NAJMENEJ vystihuje Lýceum?",
-        description: "Vyber zo 4 obrázkov",
+        title: "Predstavte si, že budúci rok má škola nový vizuál. Ktorý podľa vás NAJVIAC vystihuje Lýceum?",
+        description: "Vyber 1 z 4 obrázkov",
         type: "image_choice",
         required: false,
         multiple: false,
@@ -184,36 +181,50 @@ const teacherQuestions = [
     },
     {
         number: 6,
+        title: "A opačne, ktorý podľa vás NAJMENEJ vystihuje Lýceum?",
+        description: "Vyber 1 z 4 obrázkov",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
+        ]
+    },
+    {
+        number: 7,
         title: "Poznáte vizuál, dizajn, značku alebo školu, ktorá vás inšpiruje a mohla by byť príkladom pre Lýceum?",
         description: "Môžete pridať odkaz – napríklad z Pinterestu alebo webu",
         type: "textarea"
     },
     {
-        number: 7,
+        number: 8,
         title: "Predstavte si, že o 5–10 rokov má Lýceum vynikajúcu povesť – presne takú, akú by ste si priali. Ako by sa o tejto škole hovorilo? Aký imidž by mala mať?",
         description: "",
         type: "textarea"
     },
     {
-        number: 8,
+        number: 9,
         title: "Rozprávate sa s niekým, kto Lýceum nepozná. Ako by ste v pár vetách opísali túto školu?",
         description: "",
         type: "textarea"
     },
     {
-        number: 9,
+        number: 10,
         title: "Keby bolo Lýceum človek, zviera alebo značka – aké by bolo?",
         description: "Skúste ho opísať niekoľkými slovami – aký má charakter, štýl, energiu alebo správanie.",
         type: "textarea"
     },
     {
-        number: 10,
+        number: 11,
         title: "Ako by podľa vás mala škola komunikovať so svetom (so študentmi, rodičmi, verejnosťou)?",
         description: "Aký tón je pre Lýceum prirodzený – otvorený, odborný, priamy, ľudský...",
         type: "textarea"
     },
     {
-        number: 11,
+        number: 12,
         title: "Môžeme vás kontaktovať, keď budeme pokračovať v téme vizuálu a komunikácie Lýcea?",
         description: "Napíšte meno alebo e-mail",
         type: "textarea"
@@ -223,47 +234,33 @@ const teacherQuestions = [
 // Questions for parents
 const parentQuestions = [
     {
-        number: 2,
+        number: 3,
         title: "Koľko detí máte na Lýceu a v akom sú ročníku?",
         description: "",
         type: "textarea"
     },
     {
-        number: 3,
+        number: 4,
         title: "Predstavte si, že hovoríte s niekým, kto Lýceum nepozná. Ako by ste v pár vetách opísali túto školu?",
         description: "",
         type: "textarea"
     },
     {
-        number: 4,
+        number: 5,
         title: "Ako vaše deti hovoria o Lýceu?",
         description: "Čo sa im najviac páči? Ako o škole rozprávajú kamarátom alebo doma?",
         type: "textarea"
     },
     {
-        number: 5,
+        number: 6,
         title: "Ako vy osobne vnímate Lýceum – čo sa vám páči, čo by ste zlepšili a aký máte celkový dojem?",
         description: "",
         type: "textarea"
     },
     {
-        number: 6,
-        title: "Ktorá z týchto vizualizácií podľa vás NAJVIAC vystihuje Lýceum?",
-        description: "Vyber zo 4 obrázkov – atmosféra školy, vzťahy, energia, nálada",
-        type: "image_choice",
-        required: false,
-        multiple: false,
-        images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
-        ]
-    },
-    {
         number: 7,
-        title: "A ktorá z týchto vizualizácií podľa vás NAJMENEJ zodpovedá tomu, ako Lýceum vnímate?",
-        description: "Vyber zo 4 obrázkov",
+        title: "Ktorá z týchto vizualizácií podľa vás NAJVIAC vystihuje Lýceum?",
+        description: "Vyber 1 z 4 obrázkov – atmosféra školy, vzťahy, energia, nálada",
         type: "image_choice",
         required: false,
         multiple: false,
@@ -276,12 +273,26 @@ const parentQuestions = [
     },
     {
         number: 8,
+        title: "A ktorá z týchto vizualizácií podľa vás NAJMENEJ zodpovedá tomu, ako Lýceum vnímate?",
+        description: "Vyber 1 z 4 obrázkov",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
+        ]
+    },
+    {
+        number: 9,
         title: "Čo by ste si priali, aby o Lýceu vedeli alebo vnímali ľudia mimo školy?",
         description: "Napr. na čo ste ako rodič najviac hrdí, čo by ste chceli, aby sa o škole vedelo",
         type: "textarea"
     },
     {
-        number: 9,
+        number: 10,
         title: "Radi by ste sa zapojili do diskusie o novom vizuáli a značke Lýcea?",
         description: "Ak áno, napíšte svoje meno alebo e-mail.",
         type: "textarea"
@@ -301,7 +312,7 @@ const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwlp_LoD1yVhP
 
 // Build questions array based on role
 function buildQuestionsForRole(role) {
-    questions = [commonQuestions.intro, commonQuestions.role];
+    questions = [commonQuestions.language, commonQuestions.intro, commonQuestions.role];
     
     const roleChoice = typeof role === 'object' && role.choiceIndex !== undefined 
         ? commonQuestions.role.choices[role.choiceIndex].toLowerCase()
@@ -428,7 +439,7 @@ function initSurvey() {
     loadSavedAnswers();
     
     // Start with common questions only
-    questions = [commonQuestions.intro, commonQuestions.role];
+    questions = [commonQuestions.language, commonQuestions.intro, commonQuestions.role];
     
     // Initialize building visualization
     initBuildingVisualization();
@@ -772,8 +783,8 @@ function showQuestion(index) {
         // Remove intro-active class to allow scrolling
         document.body.classList.remove('intro-active');
         
-        // Show building side starting from question 1 (role selection)
-        if (index >= 1 && buildingSide) {
+        // Show building side starting from question 2 (role selection)
+        if (index >= 2 && buildingSide) {
             // Delay to allow smooth transition
             setTimeout(() => {
                 buildingSide.classList.add('visible');
@@ -787,14 +798,14 @@ function showQuestion(index) {
     }
     
     // Mobile specific: always show building side for questions after intro
-    if (index >= 1 && buildingSide && window.innerWidth <= 1024) {
+    if (index >= 2 && buildingSide && window.innerWidth <= 1024) {
         buildingSide.classList.add('visible');
     }
     
-    // Hide building intro text (not the title) from question 2 onwards
+    // Hide building intro text (not the title) from question 3 onwards
     const buildingIntroText = document.getElementById('buildingIntroText');
     if (buildingIntroText) {
-        if (index >= 2) {
+        if (index >= 3) {
             buildingIntroText.style.display = 'none';
         } else {
             buildingIntroText.style.display = 'block';
@@ -1029,16 +1040,16 @@ function nextQuestion() {
     }
     
     // Special handling for role selection - rebuild questions FIRST
-    if (currentQuestion === 1 && answers[1] !== undefined) {
-        buildQuestionsForRole(answers[1]);
+    if (currentQuestion === 2 && answers[2] !== undefined) {
+        buildQuestionsForRole(answers[2]);
         // Re-render all questions with new role-specific questions
         renderQuestions();
     }
     
     // Add building part when moving forward from questions (including role selection)
-    // Skip only intro (question 0)
+    // Skip language selection (question 0) and intro (question 1)
     // Add block even if question is not answered (optional questions)
-    if (currentQuestion >= 1) {
+    if (currentQuestion >= 2) {
         addBuildingPart();
     }
     
@@ -1140,6 +1151,10 @@ function updateProgress() {
         // Intro screen - 0% progress
         progressPercentage = 0;
         currentQuestionNum = 0;
+    } else if (currentQuestion === 0) {
+        // Language selection - 0% progress
+        progressPercentage = 0;
+        currentQuestionNum = 0;
     } else {
         // Regular questions - progress based on position
         progressPercentage = (currentQuestion / totalQuestions) * 100;
@@ -1155,7 +1170,7 @@ function updateNavigation() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
-    // Disable previous button on first question
+    // Disable previous button on first question (language selection)
     prevBtn.disabled = currentQuestion === 0;
 
     // Change next button text on last question
