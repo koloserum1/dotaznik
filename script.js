@@ -733,7 +733,7 @@ function renderQuestions() {
         
         // Use translated title if available
         const questionTitle = q[`title_${currentLang}`] || q.title;
-        contentHTML += `<h2 class="question-title ${q.type === 'intro' ? 'intro-title' : ''}">${questionTitle}${q.required ? ' <span class="required">*</span>' : ''}</h2>`;
+        contentHTML += `<h2 class="question-title ${q.type === 'intro' ? 'intro-title' : ''}">${questionTitle}</h2>`;
 
         // Use translated description if available
         const questionDesc = q[`description_${currentLang}`] || q.description;
