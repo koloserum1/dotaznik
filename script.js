@@ -79,10 +79,10 @@ const studentQuestions = [
         required: false,
         multiple: false,
         images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1", label_en: "Image 1" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2", label_en: "Image 2" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3", label_en: "Image 3" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4", label_en: "Image 4" }
+            { id: "1obrázok", url: "images/1obrázok.jpg", label: "Obrázok 1", label_en: "Image 1" },
+            { id: "2obrázok", url: "images/2obrázok.jpg", label: "Obrázok 2", label_en: "Image 2" },
+            { id: "3obrázok", url: "images/3obrázok.jpg", label: "Obrázok 3", label_en: "Image 3" },
+            { id: "4obrázok", url: "images/4obrázok.jpg", label: "Obrázok 4", label_en: "Image 4" }
         ]
     },
     {
@@ -95,10 +95,10 @@ const studentQuestions = [
         required: false,
         multiple: false,
         images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1", label_en: "Image 1" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2", label_en: "Image 2" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3", label_en: "Image 3" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4", label_en: "Image 4" }
+            { id: "1obrázok", url: "images/1obrázok.jpg", label: "Obrázok 1", label_en: "Image 1" },
+            { id: "2obrázok", url: "images/2obrázok.jpg", label: "Obrázok 2", label_en: "Image 2" },
+            { id: "3obrázok", url: "images/3obrázok.jpg", label: "Obrázok 3", label_en: "Image 3" },
+            { id: "4obrázok", url: "images/4obrázok.jpg", label: "Obrázok 4", label_en: "Image 4" }
         ]
     },
     {
