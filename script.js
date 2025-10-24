@@ -6,11 +6,9 @@ const commonQuestions = {
         description: "",
         type: "intro",
         content: `Milí študenti, učitelia, rodičia a priatelia Lýcea,
-
 pracujeme na novej vizuálnej identite a webovej prezentácii školy.
-Chceme, aby Lýceum navonok vyzeralo tak, ako ho všetci reálne vnímame – ako moderné, otvorené a inšpiratívne miesto.
-
-Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou tejto zmeny. 💜`
+Chceme zistiť, ako Lýceum reálne vnímate – čo pre vás znamená, ako pôsobí navonok a čo by podľa vás malo vyjadrovať. 
+Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou tejto zmeny. 💜`
     },
     role: {
         number: 1,
@@ -30,7 +28,7 @@ Pomôžte nám lepšie pochopiť, čo pre vás Lýceum znamená. Dotazník je an
 const studentQuestions = [
     {
         number: 2,
-        title: "Aký ste ročník?",
+        title: "Aký si ročník?",
         description: "",
         type: "choice",
         required: true,
@@ -43,13 +41,7 @@ const studentQuestions = [
     },
     {
         number: 3,
-        title: "Predstav si, že hovoríš s niekým, kto Lýceum nepozná. Ako by si v pár vetách opísal/a túto školu?",
-        description: "",
-        type: "textarea"
-    },
-    {
-        number: 4,
-        title: "Do akej miery máš pocit, že súčasná vizuálna identita a komunikácia Lýcea vystihujú, akou školou v skutočnosti sme?",
+        title: "Máš pocit, že súčasná vizuálna identita Lýcea vystihuje, akí naozaj sme?",
         description: "",
         type: "scale",
         required: true,
@@ -58,64 +50,81 @@ const studentQuestions = [
         scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"]
     },
     {
-        number: 5,
-        title: "Ktorá z týchto vizualizácií ti najviac evokuje Lýceum?",
-        description: "Vyber jeden obrázok, ktorý podľa teba najlepšie vystihuje školu",
+        number: 4,
+        title: "Predstav si, že budúci rok má škola nový vizuál. Ktorý podľa teba NAJVIAC vystihuje Lýceum?",
+        description: "Vyber zo 4 obrázkov",
         type: "image_choice",
         required: false,
         multiple: false,
         images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
+        ]
+    },
+    {
+        number: 5,
+        title: "A opačne, ktorý podľa teba NAJMENEJ vystihuje Lýceum?",
+        description: "Vyber zo 4 obrázkov",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
         ]
     },
     {
         number: 6,
-        title: "Ktorá z týchto vizualizácií ti najmenej evokuje Lýceum?",
-        description: "Vyber jeden obrázok, ktorý sa k Lýceu vôbec nehodí",
-        type: "image_choice",
-        required: false,
-        multiple: false,
-        images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
-        ]
+        title: "Poznáš vizuál, dizajn, značku alebo školu, ktorá ťa inšpiruje a mohla by byť príkladom pre Lýceum?",
+        description: "Môžeš pridať odkaz – napríklad z Pinterestu alebo webu",
+        type: "textarea"
     },
     {
         number: 7,
-        title: "Máš nejaký obrázok, logo alebo dizajn, ktorý ťa inšpiruje a mohol by byť pre Lýceum príkladom?",
-        description: "Pinterest, vlastná galéria, čokoľvek z internetu... Môžeš vložiť link",
+        title: "Predstav si, že o 5–10 rokov má Lýceum vynikajúcu povesť – presne takú, akú by si si prial/a. Ako by sa o tejto škole hovorilo? Aký imidž by mala mať?",
+        description: "",
         type: "textarea"
     },
     {
         number: 8,
-        title: "Predstav si, že o 5–10 rokov má Lýceum vynikajúcu povesť presne takú, akú by si si prial/a. Ako by sa o škole hovorilo? Aký imidž by mala mať?",
+        title: "Rozprávaš sa s niekým, kto Lýceum nepozná. Ako by si v pár vetách opísal/a túto školu?",
         description: "",
         type: "textarea"
     },
     {
         number: 9,
-        title: "Ako často navštevuješ oficiálnu webovú stránku Lýcea a čo na nej považuješ za užitočné alebo vydarené?",
+        title: "Ako často navštevuješ webstránku Lýcea?",
         description: "",
-        type: "choice_with_textarea",
-        required: true,
+        type: "choice",
+        required: false,
         choices: [
-            "Nikdy",
-            "Raz za čas (napr. kvôli oznamom)",
-            "Pravidelne (napr. kvôli rozvrhu, akciám...)",
-            "Často (je to môj hlavný zdroj informácií o škole)",
-            "iné – uveďte"
-        ],
-        textareaPrompt: "Čo na webe považuješ za užitočné alebo vydarené?"
+            "Denne",
+            "Týždenne",
+            "Mesačne",
+            "Zriedkavo",
+            "Nikdy"
+        ]
     },
     {
         number: 10,
-        title: "Chcel/a by si sa zapojiť do ďalšej diskusie o vizuálnej identite a komunikácii Lýcea?",
-        description: "Ak máš chuť pomôcť s tvorbou novej identity školy, budeme radi! Napíš sem, že máš záujem, alebo nám daj vedieť, že by si sa rád/rada stretol/a či porozprával/a.",
+        title: "Čo na webstránke Lýcea považuješ za užitočné alebo vydarené?",
+        description: "",
+        type: "textarea"
+    },
+    {
+        number: 11,
+        title: "Keby bolo Lýceum človek, zviera alebo značka – aké by bolo?",
+        description: "Skús ho opísať niekoľkými slovami – aký má charakter, štýl, energiu alebo správanie.",
+        type: "textarea"
+    },
+    {
+        number: 12,
+        title: "Môžeme sa ti ozvať, keď budeme pokračovať v téme vizuálu Lýcea?",
+        description: "Napíš meno alebo e-mail",
         type: "textarea"
     }
 ];
@@ -129,21 +138,15 @@ const teacherQuestions = [
         type: "choice",
         required: true,
         choices: [
-            "Menej ako 1 rok",
+            "Do 1 roka",
             "1–2 roky",
-            "3 roky",
-            "4+ roky"
+            "2–3 rokov",
+            "Viac ako 3 roky"
         ]
     },
     {
         number: 3,
-        title: "Predstavte si, že hovoríte s niekým, kto Lýceum nepozná. Ako by ste v pár vetách opísali túto školu?",
-        description: "",
-        type: "textarea"
-    },
-    {
-        number: 4,
-        title: "Do akej miery máte pocit, že súčasná vizuálna identita a komunikácia Lýcea vystihujú, akou školou v skutočnosti sme?",
+        title: "Máte pocit, že súčasná vizuálna identita Lýcea vystihuje, akí naozaj sme?",
         description: "",
         type: "scale",
         required: true,
@@ -152,67 +155,67 @@ const teacherQuestions = [
         scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"]
     },
     {
-        number: 5,
-        title: "Ktorá z týchto vizualizácií vám najviac evokuje Lýceum?",
-        description: "Vyber jeden obrázok, ktorý podľa vás najlepšie vystihuje školu",
+        number: 4,
+        title: "Predstavte si, že budúci rok má škola nový vizuál. Ktorý podľa vás NAJVIAC vystihuje Lýceum?",
+        description: "Vyber zo 4 obrázkov",
         type: "image_choice",
         required: false,
         multiple: false,
         images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
+        ]
+    },
+    {
+        number: 5,
+        title: "A opačne, ktorý podľa vás NAJMENEJ vystihuje Lýceum?",
+        description: "Vyber zo 4 obrázkov",
+        type: "image_choice",
+        required: false,
+        multiple: false,
+        images: [
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
         ]
     },
     {
         number: 6,
-        title: "Ktorá z týchto vizualizácií vám najmenej evokuje Lýceum?",
-        description: "Vyber jeden obrázok, ktorý sa k Lýceu vôbec nehodí",
-        type: "image_choice",
-        required: false,
-        multiple: false,
-        images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
-        ]
+        title: "Poznáte vizuál, dizajn, značku alebo školu, ktorá vás inšpiruje a mohla by byť príkladom pre Lýceum?",
+        description: "Môžete pridať odkaz – napríklad z Pinterestu alebo webu",
+        type: "textarea"
     },
     {
         number: 7,
-        title: "Aké hodnoty podľa vás najviac vystihujú Lýceum a jeho kultúru?",
-        description: "Môžete vybrať alebo dopísať vlastné – napr. sloboda, spolupráca, zvedavosť, autenticita...",
+        title: "Predstavte si, že o 5–10 rokov má Lýceum vynikajúcu povesť – presne takú, akú by ste si priali. Ako by sa o tejto škole hovorilo? Aký imidž by mala mať?",
+        description: "",
         type: "textarea"
     },
     {
         number: 8,
-        title: "Ako sa podľa vás Lýceum odlišuje od iných škôl?",
-        description: "Čo robí školu rozpoznateľnou navonok",
+        title: "Rozprávate sa s niekým, kto Lýceum nepozná. Ako by ste v pár vetách opísali túto školu?",
+        description: "",
         type: "textarea"
     },
     {
         number: 9,
-        title: "Ak by sa Lýceum stalo \"značkou\" so svojou osobnosťou, aká by bola?",
-        description: "Prirovnanie k človeku, značke, charakteru",
+        title: "Keby bolo Lýceum človek, zviera alebo značka – aké by bolo?",
+        description: "Skúste ho opísať niekoľkými slovami – aký má charakter, štýl, energiu alebo správanie.",
         type: "textarea"
     },
     {
         number: 10,
-        title: "Máte nejaký obrázok, logo alebo dizajn, ktorý vás inšpiruje a mohol by byť pre Lýceum príkladom?",
-        description: "Pinterest, vlastná galéria, internet – možnosť pridať odkaz",
+        title: "Ako by podľa vás mala škola komunikovať so svetom (so študentmi, rodičmi, verejnosťou)?",
+        description: "Aký tón je pre Lýceum prirodzený – otvorený, odborný, priamy, ľudský...",
         type: "textarea"
     },
     {
         number: 11,
-        title: "Ako by ste si predstavovali, že Lýceum komunikuje so svetom (študentmi, rodičmi, verejnosťou)?",
-        description: "Tón komunikácie – otvorený, odborný, priamy, ľudský...",
-        type: "textarea"
-    },
-    {
-        number: 12,
-        title: "Chceli by ste sa zapojiť do tvorby novej identity alebo byť súčasťou diskusie?",
-        description: "",
+        title: "Môžeme vás kontaktovať, keď budeme pokračovať v téme vizuálu a komunikácie Lýcea?",
+        description: "Napíšte meno alebo e-mail",
         type: "textarea"
     }
 ];
@@ -234,53 +237,53 @@ const parentQuestions = [
     {
         number: 4,
         title: "Ako vaše deti hovoria o Lýceu?",
-        description: "Napr. čo im najviac páči, ako opisujú školu kamarátom alebo doma",
+        description: "Čo sa im najviac páči? Ako o škole rozprávajú kamarátom alebo doma?",
         type: "textarea"
     },
     {
         number: 5,
-        title: "Ako vy osobne vnímate Lýceum?",
-        description: "Napr. čo sa vám páči, čo by ste zlepšili, aký máte celkový dojem",
+        title: "Ako vy osobne vnímate Lýceum – čo sa vám páči, čo by ste zlepšili a aký máte celkový dojem?",
+        description: "",
         type: "textarea"
     },
     {
         number: 6,
-        title: "Ktorá z týchto vizualizácií podľa vás najlepšie vystihuje Lýceum?",
-        description: "Vyber jeden obrázok – atmosféra školy, vzťahy, energia, nálada",
+        title: "Ktorá z týchto vizualizácií podľa vás NAJVIAC vystihuje Lýceum?",
+        description: "Vyber zo 4 obrázkov – atmosféra školy, vzťahy, energia, nálada",
         type: "image_choice",
         required: false,
         multiple: false,
         images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
         ]
     },
     {
         number: 7,
-        title: "Ktorá z týchto vizualizácií podľa vás najviac nezodpovedá tomu, ako Lýceum vnímate?",
-        description: "Vyber jeden obrázok",
+        title: "A ktorá z týchto vizualizácií podľa vás NAJMENEJ zodpovedá tomu, ako Lýceum vnímate?",
+        description: "Vyber zo 4 obrázkov",
         type: "image_choice",
         required: false,
         multiple: false,
         images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok" }
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
         ]
     },
     {
         number: 8,
         title: "Čo by ste si priali, aby o Lýceu vedeli alebo vnímali ľudia mimo školy?",
-        description: "Ideálne z pohľadu reputácie a imidžu školy",
+        description: "Napr. na čo ste ako rodič najviac hrdí, čo by ste chceli, aby sa o škole vedelo",
         type: "textarea"
     },
     {
         number: 9,
         title: "Radi by ste sa zapojili do diskusie o novom vizuáli a značke Lýcea?",
-        description: "",
+        description: "Ak áno, napíšte svoje meno alebo e-mail.",
         type: "textarea"
     }
 ];
@@ -342,16 +345,16 @@ let blocksPerQuestion = 1; // Will be calculated based on total questions
 
 // Building messages for different stages
 const buildingMessages = [
-    "Začíname budovať...",
-    "Kladieme základy...",
-    "Stavíme steny...",
-    "Pridávame okná...",
+    "Kladieme základy... 🏗️",
+    "Stavíme hlavnú budovu...",
+    "Prvé okná sa otvárajú...",
     "Ďalšie okná...",
-    "Ešte viac okien...",
+    "Poschodia rastú...",
+    "Svetlo vo vnútri... 💡",
     "Dokončujeme okná...",
     "Pridávame dvere...",
-    "Detaily dverí...",
-    "Strecha...",
+    "Kľučka na dverách... 🚪",
+    "Strecha sa montuje...",
     "Lýceum je hotové! 🎉"
 ];
 
