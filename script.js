@@ -541,8 +541,10 @@ function addBuildingPart() {
     }
     
     // Update message after all blocks are added
-    const messageIndex = Math.min(buildingProgress - 1, buildingMessages.length - 1);
-    updateBuildingMessage(buildingMessages[messageIndex]);
+    const currentLang = localStorage.getItem('lyceum_language') || 'sk';
+    const t = translations[currentLang];
+    const messageIndex = Math.min(buildingProgress - 1, t.building.messages.length - 1);
+    updateBuildingMessage(t.building.messages[messageIndex]);
     
     console.log('Building progress:', buildingProgress, '/', totalBlocks, 'Question:', questionNumber, '/', totalQuestions);
 }
