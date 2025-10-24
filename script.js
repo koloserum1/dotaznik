@@ -1482,20 +1482,14 @@ function initLanguageToggle() {
             localStorage.setItem('lyceum_language', btn.dataset.lang);
             
             // Update content with new language
-            updateLanguage(btn.dataset.lang);
+            switchLanguage(btn.dataset.lang);
             console.log('Language switched to:', btn.dataset.lang);
         });
     });
-    
-    // Don't call updateLanguage here - content is already in Slovak by default
-    // Only update if language was previously set to English
-    if (currentLang === 'en') {
-        updateLanguage(currentLang);
-    }
 }
 
-// Update content with selected language
-function updateLanguage(lang) {
+// Switch language during survey
+function switchLanguage(lang) {
     const t = translations[lang];
     if (!t) return;
     
