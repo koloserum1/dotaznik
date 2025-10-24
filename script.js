@@ -586,6 +586,7 @@ async function sendToGoogleSheets(isComplete = false) {
             sessionId: sessionId,
             timestamp: timestamp,
             isComplete: isComplete,
+            language: localStorage.getItem('lyceum_language') || 'sk',
             answers: answersArray
         };
         
