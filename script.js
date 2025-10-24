@@ -301,15 +301,11 @@ const parentQuestions = [
         required: true,
         choices: [
             "1 dieťa",
-            "2 deti",
-            "3 deti",
-            "4+ detí"
+            "2 deti"
         ],
         choices_en: [
             "1 child",
-            "2 children",
-            "3 children",
-            "4+ children"
+            "2 children"
         ]
     },
     {
