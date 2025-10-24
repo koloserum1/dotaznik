@@ -3,16 +3,22 @@ const commonQuestions = {
     intro: {
         number: 0,
         title: "Nový branding Lýcea",
+        title_en: "New Lýceum Branding",
         description: "",
         type: "intro",
         content: `Milí študenti, učitelia, rodičia a priatelia Lýcea,
 pracujeme na novej vizuálnej identite a webovej prezentácii školy.
 Chceme zistiť, ako Lýceum reálne vnímate – čo pre vás znamená, ako pôsobí navonok a čo by podľa vás malo vyjadrovať. 
-Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou tejto zmeny. 💜`
+Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou tejto zmeny. 💜`,
+        content_en: `Dear students, teachers, parents and friends of Lýceum,
+we are working on a new visual identity and website for the school.
+We want to find out how you really perceive Lýceum – what it means to you, how it appears externally and what you think it should express.
+The survey is anonymous and takes just a few minutes. Thank you for being part of this change. 💜`
     },
     role: {
         number: 1,
         title: "Aká je Vaša rola vo vzťahu k Lýceu?",
+        title_en: "What is your role in relation to Lýceum?",
         description: "",
         type: "choice",
         required: true,
@@ -20,6 +26,11 @@ Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou
             "študent",
             "učiteľ",
             "rodič"
+        ],
+        choices_en: [
+            "student",
+            "teacher",
+            "parent"
         ]
     }
 };
@@ -29,6 +40,7 @@ const studentQuestions = [
     {
         number: 2,
         title: "Aký si ročník?",
+        title_en: "What year are you?",
         description: "",
         type: "choice",
         required: true,
@@ -37,30 +49,40 @@ const studentQuestions = [
             "2. ročník",
             "3. ročník",
             "4. ročník"
+        ],
+        choices_en: [
+            "1st year",
+            "2nd year",
+            "3rd year",
+            "4th year"
         ]
     },
     {
         number: 3,
         title: "Máš pocit, že súčasná vizuálna identita Lýcea vystihuje, akí naozaj sme?",
+        title_en: "Do you feel that Lýceum's current visual identity captures who we really are?",
         description: "",
         type: "scale",
         required: true,
         scaleMin: 1,
         scaleMax: 5,
-        scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"]
+        scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"],
+        scaleLabels_en: ["Doesn't capture at all", "Completely captures"]
     },
     {
         number: 4,
         title: "Predstav si, že budúci rok má škola nový vizuál. Ktorý podľa teba NAJVIAC vystihuje Lýceum?",
+        title_en: "Imagine that next year the school has a new visual. Which one do you think BEST represents Lýceum?",
         description: "Vyber 1 z 4 obrázkov",
+        description_en: "Choose 1 from 4 images",
         type: "image_choice",
         required: false,
         multiple: false,
         images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1", label_en: "Image 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2", label_en: "Image 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3", label_en: "Image 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4", label_en: "Image 4" }
         ]
     },
     {
@@ -1259,6 +1281,102 @@ window.addEventListener('beforeunload', (e) => {
     sendToGoogleSheets(false);
 });
 
+// Language translations
+const translations = {
+    sk: {
+        intro: {
+            title: "Nový branding Lýcea",
+            content: `Milí študenti, učitelia, rodičia a priatelia Lýcea,
+pracujeme na novej vizuálnej identite a webovej prezentácii školy.
+Chceme zistiť, ako Lýceum reálne vnímate – čo pre vás znamená, ako pôsobí navonok a čo by podľa vás malo vyjadrovať. 
+Dotazník je anonymný a zaberie len pár minút. Ďakujeme, že ste súčasťou tejto zmeny. 💜`
+        },
+        role: {
+            title: "Aká je Vaša rola vo vzťahu k Lýceu?",
+            choices: ["študent", "učiteľ", "rodič"]
+        },
+        navigation: {
+            back: "← Späť",
+            continue: "Pokračovať →",
+            start: "Začať dotazník →"
+        },
+        progress: "Otázka",
+        of: "z",
+        answered: "Zodpovedané",
+        required: "Táto otázka je povinná. Prosím, odpovedzte na ňu.",
+        completion: {
+            loading: "Odosielam odpovede...",
+            success: "✓ Ďakujeme!",
+            successText: "Váš dotazník bol úspešne odoslaný.",
+            error: "⚠ Pozor",
+            errorText: "Vaše odpovede sú uložené lokálne. Skúsime ich odoslať automaticky."
+        },
+        building: {
+            title: "Stavajme Lýceum spolu",
+            intro: "S každou vašou odpoveďou vyrastá nová budova. Sledujte, ako vaše odpovede pomáhajú budovať Lýceum. 💙",
+            messages: [
+                "Kladieme základy... 🏗️",
+                "Stavíme hlavnú budovu...",
+                "Prvé okná sa otvárajú...",
+                "Ďalšie okná...",
+                "Poschodia rastú...",
+                "Svetlo vo vnútri... 💡",
+                "Dokončujeme okná...",
+                "Pridávame dvere...",
+                "Kľučka na dverách... 🚪",
+                "Strecha sa montuje...",
+                "Lýceum je hotové! 🎉"
+            ]
+        }
+    },
+    en: {
+        intro: {
+            title: "New Lýceum Branding",
+            content: `Dear students, teachers, parents and friends of Lýceum,
+we are working on a new visual identity and website for the school.
+We want to find out how you really perceive Lýceum – what it means to you, how it appears externally and what you think it should express.
+The survey is anonymous and takes just a few minutes. Thank you for being part of this change. 💜`
+        },
+        role: {
+            title: "What is your role in relation to Lýceum?",
+            choices: ["student", "teacher", "parent"]
+        },
+        navigation: {
+            back: "← Back",
+            continue: "Continue →",
+            start: "Start Survey →"
+        },
+        progress: "Question",
+        of: "of",
+        answered: "Answered",
+        required: "This question is required. Please answer it.",
+        completion: {
+            loading: "Sending responses...",
+            success: "✓ Thank you!",
+            successText: "Your survey has been successfully submitted.",
+            error: "⚠ Warning",
+            errorText: "Your responses are saved locally. We will try to send them automatically."
+        },
+        building: {
+            title: "Let's build Lýceum together",
+            intro: "With each of your answers, a new building grows. Watch how your responses help build Lýceum. 💙",
+            messages: [
+                "Laying foundations... 🏗️",
+                "Building main structure...",
+                "First windows opening...",
+                "More windows...",
+                "Floors growing...",
+                "Light inside... 💡",
+                "Finishing windows...",
+                "Adding doors...",
+                "Door handle... 🚪",
+                "Installing roof...",
+                "Lýceum is ready! 🎉"
+            ]
+        }
+    }
+};
+
 // Language toggle functionality
 function initLanguageToggle() {
     const langButtons = document.querySelectorAll('.lang-btn');
@@ -1281,10 +1399,101 @@ function initLanguageToggle() {
             // Save language preference
             localStorage.setItem('lyceum_language', btn.dataset.lang);
             
-            // Here you could add language switching logic if needed
+            // Update content with new language
+            updateLanguage(btn.dataset.lang);
             console.log('Language switched to:', btn.dataset.lang);
         });
     });
+    
+    // Set initial language
+    updateLanguage(currentLang);
+}
+
+// Update content with selected language
+function updateLanguage(lang) {
+    const t = translations[lang];
+    if (!t) return;
+    
+    // Update intro content
+    const introTitle = document.querySelector('.intro-title');
+    if (introTitle) {
+        introTitle.textContent = t.intro.title;
+    }
+    
+    const introContent = document.querySelector('.intro-content');
+    if (introContent) {
+        introContent.innerHTML = t.intro.content.replace(/\n/g, '<br>');
+    }
+    
+    // Update navigation buttons
+    const backBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const startBtn = document.querySelector('.intro-button');
+    
+    if (backBtn) backBtn.textContent = t.navigation.back;
+    if (nextBtn) nextBtn.textContent = t.navigation.continue;
+    if (startBtn) startBtn.textContent = t.navigation.start;
+    
+    // Update building messages
+    const buildingTitle = document.querySelector('.building-intro-message h2');
+    const buildingIntro = document.getElementById('buildingIntroText');
+    
+    if (buildingTitle) buildingTitle.textContent = t.building.title;
+    if (buildingIntro) buildingIntro.textContent = t.building.intro;
+    
+    // Update building messages array
+    if (window.buildingMessages) {
+        window.buildingMessages = t.building.messages;
+    }
+    
+    // Update current question if visible
+    updateCurrentQuestionLanguage(lang);
+}
+
+// Update current question with new language
+function updateCurrentQuestionLanguage(lang) {
+    const currentQ = questions[currentQuestion];
+    if (!currentQ) return;
+    
+    // Update question title
+    const titleEl = document.querySelector('.question-title');
+    if (titleEl && currentQ[`title_${lang}`]) {
+        titleEl.textContent = currentQ[`title_${lang}`];
+    }
+    
+    // Update question description
+    const descEl = document.querySelector('.question-description');
+    if (descEl && currentQ[`description_${lang}`]) {
+        descEl.textContent = currentQ[`description_${lang}`];
+    }
+    
+    // Update choices for choice questions
+    if (currentQ.type === 'choice' && currentQ[`choices_${lang}`]) {
+        const choices = document.querySelectorAll('.choice');
+        choices.forEach((choice, index) => {
+            const choiceText = choice.querySelector('.choice-content span:last-child');
+            if (choiceText && currentQ[`choices_${lang}`][index]) {
+                choiceText.textContent = currentQ[`choices_${lang}`][index];
+            }
+        });
+    }
+    
+    // Update scale labels
+    if (currentQ.type === 'scale' && currentQ[`scaleLabels_${lang}`]) {
+        const scaleLabels = document.querySelectorAll('.scale-label-min, .scale-label-max');
+        if (scaleLabels.length >= 2) {
+            scaleLabels[0].textContent = currentQ[`scaleLabels_${lang}`][0];
+            scaleLabels[1].textContent = currentQ[`scaleLabels_${lang}`][1];
+        }
+    }
+    
+    // Update image choice descriptions
+    if (currentQ.type === 'image_choice' && currentQ[`description_${lang}`]) {
+        const descEl = document.querySelector('.question-description');
+        if (descEl) {
+            descEl.textContent = currentQ[`description_${lang}`];
+        }
+    }
 }
 
 // Initialize on page load
