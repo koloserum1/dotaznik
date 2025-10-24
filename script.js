@@ -1159,10 +1159,14 @@ function showRequiredError() {
             existingError.remove();
         }
         
+        // Get current language and translations
+        const currentLang = localStorage.getItem('lyceum_language') || 'sk';
+        const t = translations[currentLang];
+        
         // Add error message
         const errorDiv = document.createElement('div');
         errorDiv.className = 'required-error';
-        errorDiv.textContent = 'Táto otázka je povinná. Prosím, odpovedzte na ňu.';
+        errorDiv.textContent = t ? t.required : 'Táto otázka je povinná. Prosím, odpovedzte na ňu.';
         question.appendChild(errorDiv);
         
         // Remove error after 3 seconds
@@ -1257,7 +1261,15 @@ async function completeSurvey() {
     // Show completion screen
     document.getElementById('completionScreen').classList.add('active');
     
+    // Get current language and translations
+    const currentLang = localStorage.getItem('lyceum_language') || 'sk';
+    const t = translations[currentLang];
+    
     // Show loading
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    if (loadingIndicator && t) {
+        loadingIndicator.querySelector('p').textContent = t.completion.loading;
+    }
     document.getElementById('loadingIndicator').style.display = 'flex';
     
     // Send to Google Sheets
@@ -1268,7 +1280,12 @@ async function completeSurvey() {
     
     if (success || GOOGLE_SHEETS_URL.includes('YOUR_DEPLOYMENT_ID')) {
         // Show success message
-        document.getElementById('successMessage').style.display = 'block';
+        const successMessage = document.getElementById('successMessage');
+        if (successMessage && t) {
+            successMessage.querySelector('h1').textContent = t.completion.success;
+            successMessage.querySelector('p').textContent = t.completion.successText;
+        }
+        successMessage.style.display = 'block';
         
         // Clear localStorage after successful submission
         try {
@@ -1278,7 +1295,12 @@ async function completeSurvey() {
         }
     } else {
         // Show error message
-        document.getElementById('errorMessage').style.display = 'block';
+        const errorMessage = document.getElementById('errorMessage');
+        if (errorMessage && t) {
+            errorMessage.querySelector('h1').textContent = t.completion.error;
+            errorMessage.querySelector('p').textContent = t.completion.errorText;
+        }
+        errorMessage.style.display = 'block';
     }
 }
 
@@ -1434,9 +1456,15 @@ The survey is anonymous and takes just a few minutes. Thank you for being part o
 // Language toggle functionality
 function initLanguageToggle() {
     const langButtons = document.querySelectorAll('.lang-btn');
-    const currentLang = localStorage.getItem('lyceum_language') || 'sk';
     
-    // Set active language
+    // Always default to Slovak if not set
+    let currentLang = localStorage.getItem('lyceum_language');
+    if (!currentLang) {
+        currentLang = 'sk';
+        localStorage.setItem('lyceum_language', 'sk');
+    }
+    
+    // Set active button based on current language
     langButtons.forEach(btn => {
         if (btn.dataset.lang === currentLang) {
             btn.classList.add('active');
@@ -1459,8 +1487,11 @@ function initLanguageToggle() {
         });
     });
     
-    // Set initial language
-    updateLanguage(currentLang);
+    // Don't call updateLanguage here - content is already in Slovak by default
+    // Only update if language was previously set to English
+    if (currentLang === 'en') {
+        updateLanguage(currentLang);
+    }
 }
 
 // Update content with selected language
@@ -1468,25 +1499,11 @@ function updateLanguage(lang) {
     const t = translations[lang];
     if (!t) return;
     
-    // Update intro content
-    const introTitle = document.querySelector('.intro-title');
-    if (introTitle) {
-        introTitle.textContent = t.intro.title;
-    }
+    // Re-render all questions with new language
+    renderQuestions();
     
-    const introContent = document.querySelector('.intro-content');
-    if (introContent) {
-        introContent.innerHTML = t.intro.content.replace(/\n/g, '<br>');
-    }
-    
-    // Update navigation buttons
-    const backBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const startBtn = document.querySelector('.intro-button');
-    
-    if (backBtn) backBtn.textContent = t.navigation.back;
-    if (nextBtn) nextBtn.textContent = t.navigation.continue;
-    if (startBtn) startBtn.textContent = t.navigation.start;
+    // Show current question again
+    showQuestion(currentQuestion);
     
     // Update building messages
     const buildingTitle = document.querySelector('.building-intro-message h2');
@@ -1495,13 +1512,15 @@ function updateLanguage(lang) {
     if (buildingTitle) buildingTitle.textContent = t.building.title;
     if (buildingIntro) buildingIntro.textContent = t.building.intro;
     
-    // Update building messages array
-    if (window.buildingMessages) {
-        window.buildingMessages = t.building.messages;
-    }
+    // Update building messages array in global scope
+    buildingMessages.length = 0;
+    buildingMessages.push(...t.building.messages);
     
-    // Update current question if visible
-    updateCurrentQuestionLanguage(lang);
+    // Update progress counter
+    updateProgress();
+    
+    // Update navigation
+    updateNavigation();
 }
 
 // Update current question with new language
