@@ -1044,6 +1044,19 @@ function showQuestion(index) {
     currentQuestion = index;
     updateProgress();
     updateNavigation();
+    
+    // Update building language if not intro
+    if (index > 0) {
+        const currentLang = localStorage.getItem('lyceum_language') || 'sk';
+        const t = translations[currentLang];
+        
+        // Update building title and intro text
+        const buildingTitle = document.querySelector('.building-intro-message h2');
+        const buildingIntro = document.getElementById('buildingIntroText');
+        
+        if (buildingTitle && t) buildingTitle.textContent = t.building.title;
+        if (buildingIntro && t) buildingIntro.textContent = t.building.intro;
+    }
 }
 
 // Select a choice
