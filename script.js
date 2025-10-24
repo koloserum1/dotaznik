@@ -623,6 +623,9 @@ async function sendToGoogleSheets(isComplete = false) {
 function renderQuestions() {
     const container = document.getElementById('questionContainer');
     container.innerHTML = '';
+    
+    // Get current language
+    const currentLang = localStorage.getItem('lyceum_language') || 'sk';
 
     questions.forEach((q, index) => {
         const questionDiv = document.createElement('div');
@@ -636,20 +639,31 @@ function renderQuestions() {
             contentHTML += `<div class="question-number" data-number="${q.number}"></div>`;
         }
         
-        contentHTML += `<h2 class="question-title ${q.type === 'intro' ? 'intro-title' : ''}">${q.title}${q.required ? ' <span class="required">*</span>' : ''}</h2>`;
+        // Use translated title if available
+        const questionTitle = q[`title_${currentLang}`] || q.title;
+        contentHTML += `<h2 class="question-title ${q.type === 'intro' ? 'intro-title' : ''}">${questionTitle}${q.required ? ' <span class="required">*</span>' : ''}</h2>`;
 
-        if (q.description) {
-            contentHTML += `<p class="question-description">${q.description}</p>`;
+        // Use translated description if available
+        const questionDesc = q[`description_${currentLang}`] || q.description;
+        if (questionDesc) {
+            contentHTML += `<p class="question-description">${questionDesc}</p>`;
         }
 
         if (q.type === 'intro') {
-            contentHTML += `<div class="intro-content">${q.content.replace(/\n/g, '<br>')}</div>`;
-            contentHTML += `<button class="intro-button" onclick="nextQuestion()">Začať dotazník →</button>`;
+            // Use translated intro content if available
+            const introContent = q[`content_${currentLang}`] || q.content;
+            contentHTML += `<div class="intro-content">${introContent.replace(/\n/g, '<br>')}</div>`;
+            
+            // Get translated button text
+            const t = translations[currentLang];
+            const buttonText = t ? t.navigation.start : 'Začať dotazník →';
+            contentHTML += `<button class="intro-button" onclick="nextQuestion()">${buttonText}</button>`;
         } else if (q.type === 'choice') {
             contentHTML += '<div class="choices">';
-            q.choices.forEach((choice, choiceIndex) => {
+            const choicesArray = q[`choices_${currentLang}`] || q.choices;
+            choicesArray.forEach((choice, choiceIndex) => {
                 const letter = String.fromCharCode(65 + choiceIndex); // A, B, C, etc.
-                const isOtherOption = choice.toLowerCase().includes('iné') || choice.toLowerCase().includes('uvede');
+                const isOtherOption = choice.toLowerCase().includes('iné') || choice.toLowerCase().includes('uvede') || choice.toLowerCase().includes('other');
                 contentHTML += `
                     <div class="choice" onclick="selectChoice(${index}, ${choiceIndex})" data-is-other="${isOtherOption}">
                         <div class="choice-content">
@@ -701,8 +715,10 @@ function renderQuestions() {
             }
             contentHTML += '</div>';
             contentHTML += '<div class="scale-labels">';
-            contentHTML += `<span class="scale-label-min">${q.scaleLabels[0]}</span>`;
-            contentHTML += `<span class="scale-label-max">${q.scaleLabels[1]}</span>`;
+            // Use translated scale labels if available
+            const scaleLabels = q[`scaleLabels_${currentLang}`] || q.scaleLabels;
+            contentHTML += `<span class="scale-label-min">${scaleLabels[0]}</span>`;
+            contentHTML += `<span class="scale-label-max">${scaleLabels[1]}</span>`;
             contentHTML += '</div>';
             contentHTML += '</div>';
         } else if (q.type === 'multiple_text') {
@@ -742,9 +758,10 @@ function renderQuestions() {
             contentHTML += '</div>';
         } else if (q.type === 'choice_with_textarea') {
             contentHTML += '<div class="choices">';
-            q.choices.forEach((choice, choiceIndex) => {
+            const choicesArray = q[`choices_${currentLang}`] || q.choices;
+            choicesArray.forEach((choice, choiceIndex) => {
                 const letter = String.fromCharCode(65 + choiceIndex);
-                const isOtherOption = choice.toLowerCase().includes('iné') || choice.toLowerCase().includes('uvede');
+                const isOtherOption = choice.toLowerCase().includes('iné') || choice.toLowerCase().includes('uvede') || choice.toLowerCase().includes('other');
                 contentHTML += `
                     <div class="choice" onclick="selectChoice(${index}, ${choiceIndex})" data-is-other="${isOtherOption}">
                         <div class="choice-content">
@@ -1210,15 +1227,18 @@ function updateProgress() {
 function updateNavigation() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    
+    // Get current language and translations
+    const currentLang = localStorage.getItem('lyceum_language') || 'sk';
+    const t = translations[currentLang];
 
     // Disable previous button on first question (intro)
     prevBtn.disabled = currentQuestion === 0;
-
-    // Change next button text on last question
-    if (currentQuestion === questions.length - 1) {
-        nextBtn.textContent = 'Pokračovať →';
-    } else {
-        nextBtn.textContent = 'Pokračovať →';
+    
+    // Update button texts with translations
+    if (t) {
+        prevBtn.textContent = t.navigation.back;
+        nextBtn.textContent = t.navigation.continue;
     }
 }
 
