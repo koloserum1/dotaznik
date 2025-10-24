@@ -19,8 +19,8 @@ The survey is anonymous and takes just a few minutes. Thank you for being part o
         number: 1,
         title: "Aká je Vaša rola vo vzťahu k Lýceu?",
         title_en: "What is your role in relation to Lýceum?",
-        description: "povinné",
-        description_en: "required",
+        description: "*povinné",
+        description_en: "*required",
         type: "choice",
         required: true,
         choices: [
@@ -42,8 +42,8 @@ const studentQuestions = [
         number: 2,
         title: "Aký si ročník?",
         title_en: "What year are you?",
-        description: "povinné",
-        description_en: "required",
+        description: "*povinné",
+        description_en: "*required",
         type: "choice",
         required: true,
         choices: [
@@ -63,8 +63,8 @@ const studentQuestions = [
         number: 3,
         title: "Máš pocit, že súčasná vizuálna identita Lýcea vystihuje, akí naozaj sme?",
         title_en: "Do you feel that Lýceum's current visual identity captures who we really are?",
-        description: "povinné",
-        description_en: "required",
+        description: "*povinné",
+        description_en: "*required",
         type: "scale",
         required: true,
         scaleMin: 1,
@@ -76,10 +76,10 @@ const studentQuestions = [
         number: 4,
         title: "Predstav si, že budúci rok má škola nový vizuál. Ktorý podľa teba najviac vystihuje Lýceum?",
         title_en: "Imagine that next year the school has a new visual. Which one do you think BEST represents Lýceum?",
-        description: "Vyber 1 z 4 obrázkov",
-        description_en: "Choose 1 from 4 images",
+        description: "*povinné - Vyber 1 z 4 obrázkov",
+        description_en: "*required - Choose 1 from 4 images",
         type: "image_choice",
-        required: false,
+        required: true,
         multiple: false,
         images: [
             { id: "1obrázok", url: "images/1obrázok.jpg", label: "Obrázok 1", label_en: "Image 1" },
@@ -92,10 +92,10 @@ const studentQuestions = [
         number: 5,
         title: "A opačne, ktorý podľa teba najmenej vystihuje Lýceum?",
         title_en: "And conversely, which one do you think LEAST represents Lýceum?",
-        description: "Vyber 1 z 4 obrázkov",
-        description_en: "Choose 1 from 4 images",
+        description: "*povinné - Vyber 1 z 4 obrázkov",
+        description_en: "*required - Choose 1 from 4 images",
         type: "image_choice",
-        required: false,
+        required: true,
         multiple: false,
         images: [
             { id: "1obrázok", url: "images/1obrázok.jpg", label: "Obrázok 1", label_en: "Image 1" },
@@ -110,29 +110,33 @@ const studentQuestions = [
         title_en: "Do you know any visual, design, brand or school that inspires you and could be an example for Lýceum?",
         description: "Môžeš pridať odkaz – napríklad z Pinterestu alebo webu",
         description_en: "You can add a link – for example from Pinterest or a website",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 7,
         title: "Predstav si, že o 5–10 rokov má Lýceum vynikajúcu povesť – presne takú, akú by si si prial/a. Ako by sa o tejto škole hovorilo? Aký imidž by mala mať?",
         title_en: "Imagine that in 5–10 years Lýceum has an excellent reputation – exactly the one you would wish for. How would people talk about this school? What image should it have?",
         description: "",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 8,
         title: "Rozprávaš sa s niekým, kto Lýceum nepozná. Ako by si v pár vetách opísal/a túto školu?",
         title_en: "You're talking to someone who doesn't know Lýceum. How would you describe this school in a few sentences?",
         description: "",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 9,
         title: "Ako často navštevuješ webstránku Lýcea?",
         title_en: "How often do you visit Lýceum's website?",
-        description: "",
+        description: "*povinné",
+        description_en: "*required",
         type: "choice",
-        required: false,
+        required: true,
         choices: [
             "Denne",
             "Týždenne",
@@ -153,7 +157,8 @@ const studentQuestions = [
         title: "Čo na webstránke Lýcea považuješ za užitočné alebo vydarené?",
         title_en: "What do you find useful or well-done on Lýceum's website?",
         description: "",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 11,
@@ -161,7 +166,8 @@ const studentQuestions = [
         title_en: "If Lýceum were a person, animal or brand – what would it be like?",
         description: "Skús ho opísať niekoľkými slovami – aký má charakter, štýl, energiu alebo správanie.",
         description_en: "Try to describe it in a few words – what character, style, energy or behavior it has.",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 12,
@@ -179,8 +185,8 @@ const teacherQuestions = [
         number: 2,
         title: "Ako dlho pôsobíte na Lýceu?",
         title_en: "How long have you been working at Lýceum?",
-        description: "povinné",
-        description_en: "required",
+        description: "*povinné",
+        description_en: "*required",
         type: "choice",
         required: true,
         choices: [
@@ -200,8 +206,8 @@ const teacherQuestions = [
         number: 3,
         title: "Máte pocit, že súčasná vizuálna identita Lýcea vystihuje, akí naozaj sme?",
         title_en: "Do you feel that Lýceum's current visual identity captures who we really are?",
-        description: "povinné",
-        description_en: "required",
+        description: "*povinné",
+        description_en: "*required",
         type: "scale",
         required: true,
         scaleMin: 1,
@@ -213,10 +219,10 @@ const teacherQuestions = [
         number: 4,
         title: "Predstavte si, že budúci rok má škola nový vizuál. Ktorý podľa vás najviac vystihuje Lýceum?",
         title_en: "Imagine that next year the school has a new visual. Which one do you think best represents Lýceum?",
-        description: "Vyber 1 z 4 obrázkov",
-        description_en: "Choose 1 from 4 images",
+        description: "*povinné - Vyber 1 z 4 obrázkov",
+        description_en: "*required - Choose 1 from 4 images",
         type: "image_choice",
-        required: false,
+        required: true,
         multiple: false,
         images: [
             { id: "1obrázok", url: "images/1obrázok.jpg", label: "Obrázok 1", label_en: "Image 1" },
@@ -229,10 +235,10 @@ const teacherQuestions = [
         number: 5,
         title: "A opačne, ktorý podľa vás najmenej vystihuje Lýceum?",
         title_en: "And conversely, which one do you think least represents Lýceum?",
-        description: "Vyber 1 z 4 obrázkov",
-        description_en: "Choose 1 from 4 images",
+        description: "*povinné - Vyber 1 z 4 obrázkov",
+        description_en: "*required - Choose 1 from 4 images",
         type: "image_choice",
-        required: false,
+        required: true,
         multiple: false,
         images: [
             { id: "1obrázok", url: "images/1obrázok.jpg", label: "Obrázok 1", label_en: "Image 1" },
@@ -247,21 +253,24 @@ const teacherQuestions = [
         title_en: "Do you know any visual, design, brand or school that inspires you and could be an example for Lýceum?",
         description: "Môžete pridať odkaz – napríklad z Pinterestu alebo webu",
         description_en: "You can add a link – for example from Pinterest or a website",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 7,
         title: "Predstavte si, že o 5–10 rokov má Lýceum vynikajúcu povesť – presne takú, akú by ste si priali. Ako by sa o tejto škole hovorilo? Aký imidž by mala mať?",
         title_en: "Imagine that in 5–10 years Lýceum has an excellent reputation – exactly the one you would wish for. How would people talk about this school? What image should it have?",
         description: "",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 8,
         title: "Rozprávate sa s niekým, kto Lýceum nepozná. Ako by ste v pár vetách opísali túto školu?",
         title_en: "You're talking to someone who doesn't know Lýceum. How would you describe this school in a few sentences?",
         description: "",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 9,
@@ -269,7 +278,8 @@ const teacherQuestions = [
         title_en: "If Lýceum were a person, animal or brand – what would it be like?",
         description: "Skúste ho opísať niekoľkými slovami – aký má charakter, štýl, energiu alebo správanie.",
         description_en: "Try to describe it in a few words – what character, style, energy or behavior it has.",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 10,
@@ -277,7 +287,8 @@ const teacherQuestions = [
         title_en: "How should the school communicate with the world (with students, parents, the public)?",
         description: "Aký tón je pre Lýceum prirodzený – otvorený, odborný, priamy, ľudský...",
         description_en: "What tone is natural for Lýceum – open, professional, direct, human...",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 11,
@@ -295,8 +306,8 @@ const parentQuestions = [
         number: 2,
         title: "Koľko detí máte na Lýceu?",
         title_en: "How many children do you have at Lýceum?",
-        description: "povinné",
-        description_en: "required",
+        description: "*povinné",
+        description_en: "*required",
         type: "choice",
         required: true,
         choices: [
@@ -313,7 +324,8 @@ const parentQuestions = [
         title: "Predstavte si, že hovoríte s niekým, kto Lýceum nepozná. Ako by ste v pár vetách opísali túto školu?",
         title_en: "Imagine you're talking to someone who doesn't know Lýceum. How would you describe this school in a few sentences?",
         description: "",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 4,
@@ -321,23 +333,25 @@ const parentQuestions = [
         title_en: "How do your children talk about Lýceum?",
         description: "Čo sa im najviac páči? Ako o škole rozprávajú kamarátom alebo doma?",
         description_en: "What do they like the most? How do they talk about the school to friends or at home?",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 5,
         title: "Ako vy osobne vnímate Lýceum – čo sa vám páči, čo by ste zlepšili a aký máte z neho celkový dojem?",
         title_en: "How do you personally perceive Lýceum – what do you like, what would you improve and what is your overall impression of it?",
         description: "",
-        type: "textarea"
+        type: "textarea",
+        required: false
     },
     {
         number: 6,
         title: "Ktorá z týchto vizualizácií podľa vás najviac vystihuje Lýceum?",
         title_en: "Which of these visualizations do you think best represents Lýceum?",
-        description: "Vyber 1 z 4 obrázkov – atmosféra školy, vzťahy, energia, nálada",
-        description_en: "Choose 1 from 4 images – school atmosphere, relationships, energy, mood",
+        description: "*povinné - Vyber 1 z 4 obrázkov – atmosféra školy, vzťahy, energia, nálada",
+        description_en: "*required - Choose 1 from 4 images – school atmosphere, relationships, energy, mood",
         type: "image_choice",
-        required: false,
+        required: true,
         multiple: false,
         images: [
             { id: "1obrázok", url: "images/1obrázok.jpg", label: "Obrázok 1", label_en: "Image 1" },
@@ -350,10 +364,10 @@ const parentQuestions = [
         number: 7,
         title: "A ktorá z týchto vizualizácií podľa vás najmenej zodpovedá tomu, ako Lýceum vnímate?",
         title_en: "And which of these visualizations do you think least corresponds to how you perceive Lýceum?",
-        description: "Vyber 1 z 4 obrázkov",
-        description_en: "Choose 1 from 4 images",
+        description: "*povinné - Vyber 1 z 4 obrázkov",
+        description_en: "*required - Choose 1 from 4 images",
         type: "image_choice",
-        required: false,
+        required: true,
         multiple: false,
         images: [
             { id: "1obrázok", url: "images/1obrázok.jpg", label: "Obrázok 1", label_en: "Image 1" },
@@ -366,10 +380,10 @@ const parentQuestions = [
         number: 8,
         title: "Ako by podľa vás mala škola komunikovať so svetom (so študentmi, rodičmi, verejnosťou)?",
         title_en: "How should the school communicate with the world (with students, parents, the public)?",
-        description: "škály 1-5",
-        description_en: "scales 1-5",
+        description: "*povinné - škály 1-5",
+        description_en: "*required - scales 1-5",
         type: "multiple_scale",
-        required: false,
+        required: true,
         scales: [
             {
                 id: "formal",
