@@ -88,38 +88,45 @@ const studentQuestions = [
     {
         number: 5,
         title: "A opačne, ktorý podľa teba NAJMENEJ vystihuje Lýceum?",
+        title_en: "And conversely, which one do you think LEAST represents Lýceum?",
         description: "Vyber 1 z 4 obrázkov",
+        description_en: "Choose 1 from 4 images",
         type: "image_choice",
         required: false,
         multiple: false,
         images: [
-            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1" },
-            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2" },
-            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3" },
-            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4" }
+            { id: "img1", url: "images/img1.jpg", label: "Obrázok 1", label_en: "Image 1" },
+            { id: "img2", url: "images/img2.jpg", label: "Obrázok 2", label_en: "Image 2" },
+            { id: "img3", url: "images/img3.jpg", label: "Obrázok 3", label_en: "Image 3" },
+            { id: "img4", url: "images/img4.jpg", label: "Obrázok 4", label_en: "Image 4" }
         ]
     },
     {
         number: 6,
         title: "Poznáš vizuál, dizajn, značku alebo školu, ktorá ťa inšpiruje a mohla by byť príkladom pre Lýceum?",
+        title_en: "Do you know any visual, design, brand or school that inspires you and could be an example for Lýceum?",
         description: "Môžeš pridať odkaz – napríklad z Pinterestu alebo webu",
+        description_en: "You can add a link – for example from Pinterest or a website",
         type: "textarea"
     },
     {
         number: 7,
         title: "Predstav si, že o 5–10 rokov má Lýceum vynikajúcu povesť – presne takú, akú by si si prial/a. Ako by sa o tejto škole hovorilo? Aký imidž by mala mať?",
+        title_en: "Imagine that in 5–10 years Lýceum has an excellent reputation – exactly the one you would wish for. How would people talk about this school? What image should it have?",
         description: "",
         type: "textarea"
     },
     {
         number: 8,
         title: "Rozprávaš sa s niekým, kto Lýceum nepozná. Ako by si v pár vetách opísal/a túto školu?",
+        title_en: "You're talking to someone who doesn't know Lýceum. How would you describe this school in a few sentences?",
         description: "",
         type: "textarea"
     },
     {
         number: 9,
         title: "Ako často navštevuješ webstránku Lýcea?",
+        title_en: "How often do you visit Lýceum's website?",
         description: "",
         type: "choice",
         required: false,
@@ -129,24 +136,36 @@ const studentQuestions = [
             "Mesačne",
             "Zriedkavo",
             "Nikdy"
+        ],
+        choices_en: [
+            "Daily",
+            "Weekly",
+            "Monthly",
+            "Rarely",
+            "Never"
         ]
     },
     {
         number: 10,
         title: "Čo na webstránke Lýcea považuješ za užitočné alebo vydarené?",
+        title_en: "What do you find useful or well-done on Lýceum's website?",
         description: "",
         type: "textarea"
     },
     {
         number: 11,
         title: "Keby bolo Lýceum človek, zviera alebo značka – aké by bolo?",
+        title_en: "If Lýceum were a person, animal or brand – what would it be like?",
         description: "Skús ho opísať niekoľkými slovami – aký má charakter, štýl, energiu alebo správanie.",
+        description_en: "Try to describe it in a few words – what character, style, energy or behavior it has.",
         type: "textarea"
     },
     {
         number: 12,
         title: "Môžeme sa ti ozvať, keď budeme pokračovať v téme vizuálu Lýcea?",
+        title_en: "Can we contact you when we continue with Lýceum's visual theme?",
         description: "Napíš meno alebo e-mail",
+        description_en: "Write name or email",
         type: "textarea"
     }
 ];
@@ -156,6 +175,7 @@ const teacherQuestions = [
     {
         number: 2,
         title: "Ako dlho pôsobíte na Lýceu?",
+        title_en: "How long have you been working at Lýceum?",
         description: "",
         type: "choice",
         required: true,
@@ -164,17 +184,25 @@ const teacherQuestions = [
             "1–2 roky",
             "2–3 rokov",
             "Viac ako 3 roky"
+        ],
+        choices_en: [
+            "Less than 1 year",
+            "1–2 years",
+            "2–3 years",
+            "More than 3 years"
         ]
     },
     {
         number: 3,
         title: "Máte pocit, že súčasná vizuálna identita Lýcea vystihuje, akí naozaj sme?",
+        title_en: "Do you feel that Lýceum's current visual identity captures who we really are?",
         description: "",
         type: "scale",
         required: true,
         scaleMin: 1,
         scaleMax: 5,
-        scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"]
+        scaleLabels: ["Vôbec nevystihuje", "Úplne vystihuje"],
+        scaleLabels_en: ["Doesn't capture at all", "Completely captures"]
     },
     {
         number: 4,
@@ -247,6 +275,7 @@ const parentQuestions = [
     {
         number: 2,
         title: "Koľko detí máte na Lýceu a v akom sú ročníku?",
+        title_en: "How many children do you have at Lýceum and what year are they in?",
         description: "",
         type: "textarea"
     },
@@ -1169,7 +1198,12 @@ function updateProgress() {
     }
     
     document.getElementById('progressFill').style.width = `${progressPercentage}%`;
-    document.getElementById('questionCounter').textContent = `Otázka ${currentQuestionNum} z ${totalQuestions} | Zodpovedané: ${answeredCount}`;
+    
+    // Get current language
+    const currentLang = localStorage.getItem('lyceum_language') || 'sk';
+    const t = translations[currentLang];
+    
+    document.getElementById('questionCounter').textContent = `${t.progress} ${currentQuestionNum} ${t.of} ${totalQuestions} | ${t.answered}: ${answeredCount}`;
 }
 
 // Update navigation buttons
@@ -1487,13 +1521,37 @@ function updateCurrentQuestionLanguage(lang) {
         }
     }
     
-    // Update image choice descriptions
-    if (currentQ.type === 'image_choice' && currentQ[`description_${lang}`]) {
-        const descEl = document.querySelector('.question-description');
-        if (descEl) {
-            descEl.textContent = currentQ[`description_${lang}`];
+    // Update image choice descriptions and labels
+    if (currentQ.type === 'image_choice') {
+        if (currentQ[`description_${lang}`]) {
+            const descEl = document.querySelector('.question-description');
+            if (descEl) {
+                descEl.textContent = currentQ[`description_${lang}`];
+            }
+        }
+        
+        // Update image labels
+        if (currentQ.images) {
+            const imageChoices = document.querySelectorAll('.image-choice');
+            imageChoices.forEach((choice, index) => {
+                if (currentQ.images[index] && currentQ.images[index][`label_${lang}`]) {
+                    // Image labels are usually not visible in UI, but we can update them if needed
+                    const img = choice.querySelector('img');
+                    if (img) {
+                        img.alt = currentQ.images[index][`label_${lang}`];
+                    }
+                }
+            });
         }
     }
+    
+    // Update textarea placeholders
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+        if (textarea.placeholder && currentQ[`placeholder_${lang}`]) {
+            textarea.placeholder = currentQ[`placeholder_${lang}`];
+        }
+    });
 }
 
 // Initialize on page load
