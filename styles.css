@@ -239,62 +239,13 @@ body {
         padding: 0 12px 0 12px;
     }
     
+    /* Hide building visualization completely on mobile */
     .building-side {
-        flex: 0 0 auto;
-        height: auto;
-        position: relative;
-        padding: 0 12px 5px 12px;
-        min-height: auto;
-        border-left: none;
-        border-top: none;
-        order: 2;
-        width: 100%;
-        background: white;
-        margin-top: -10px;
+        display: none !important;
     }
 
     .building-side.visible {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .building-intro-message {
-        margin-top: 0;
-    }
-    
-    .building-visualization {
-        max-width: 100%;
-        width: 100%;
-        max-width: min(360px, 85vw);
-        margin: 0 auto;
-        margin-top: -14px;
-    }
-    
-    #buildingSvg {
-        max-width: 100%;
-    }
-
-    .building-intro-message {
-        margin-bottom: 0px;
-        margin-top: 30px;
-        padding-bottom: 0;
-        padding-top: 0;
-    }
-
-    .building-intro-message h2 {
-        font-size: 17px;
-        margin-bottom: 0px;
-        padding-bottom: 0;
-        line-height: 1.2;
-        margin-top: 0;
-    }
-
-    .building-intro-message p {
-        font-size: 13px;
-        margin-bottom: 0px;
-        padding-bottom: 0;
-        line-height: 1.4;
-        margin-top: 0;
+        display: none !important;
     }
     
     .navigation {
@@ -778,6 +729,7 @@ body {
         flex: 0 0 auto;
         justify-content: flex-start;
         align-items: center;
+        max-width: 100% !important;
     }
 
     .content-side.full-width {
@@ -786,35 +738,6 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .building-side {
-        padding: 15px 15px 30px 15px;
-        min-height: auto;
-        margin-top: 0;
-        border-top: none;
-    }
-
-    .building-visualization {
-        max-width: min(280px, 70vw);
-        margin: 0 auto;
-        margin-top: -5px;
-    }
-    
-    #buildingSvg {
-        width: 100%;
-        max-width: 280px;
-        height: auto;
-    }
-    
-    .building-message {
-        margin-top: 8px;
-        min-height: 25px;
-    }
-    
-    .building-message p {
-        font-size: 12px;
-        padding: 6px 12px;
     }
 
     .question-number {
@@ -920,23 +843,6 @@ body {
 
     .textarea-input {
         max-height: 25vh;
-    }
-    
-    .building-visualization {
-        max-width: min(240px, 60vw);
-        margin-top: -8px;
-    }
-    
-    .building-side {
-        padding: 10px 15px 20px 15px;
-    }
-    
-    .building-intro-message h2 {
-        font-size: 16px;
-    }
-    
-    .building-intro-message p {
-        font-size: 12px;
     }
 }
 
