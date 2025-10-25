@@ -957,17 +957,10 @@ function showQuestion(index) {
         if (contentSide) {
             contentSide.classList.add('full-width');
         }
-        // Block scrolling on mobile for intro page
-        if (window.innerWidth <= 768) {
-            document.body.classList.add('intro-active');
-        }
     } else {
         // Regular questions: show navigation and building
         navigation.style.display = 'flex';
         progressBar.style.display = 'block';
-        
-        // Remove intro-active class to allow scrolling
-        document.body.classList.remove('intro-active');
         
         // Show building side starting from question 1 (role selection)
         if (index >= 1 && buildingSide) {

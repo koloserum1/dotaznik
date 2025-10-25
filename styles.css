@@ -15,8 +15,8 @@ body {
 /* Language Toggle */
 .language-toggle {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
     z-index: 1000;
     display: flex;
     background: white;
@@ -366,7 +366,7 @@ body {
     .question.active {
         min-height: auto;
         justify-content: flex-start;
-        padding: 10px 0 0 0;
+        padding: 15px 0 20px 0;
     }
 }
 
@@ -389,6 +389,10 @@ body {
     display: block;
     width: 100%;
     letter-spacing: -0.5px;
+}
+
+.question-number::before {
+    content: attr(data-number);
 }
 
 .question-number::after {
@@ -692,9 +696,21 @@ body {
 }
 
 @media (max-width: 768px) {
+    .language-toggle {
+        top: 12px;
+        right: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+    
+    .lang-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
     .question-container {
         justify-content: flex-start;
         align-items: stretch;
+        padding-bottom: 100px;
     }
 
     body {
@@ -737,10 +753,12 @@ body {
         left: 50%;
         transform: translateX(-50%);
         font-size: 12px;
+        white-space: nowrap;
     }
 
     .completion-screen {
         padding: 20px;
+        padding-bottom: 120px;
         min-height: 50vh;
     }
 
@@ -755,7 +773,7 @@ body {
     }
 
     .content-side {
-        padding: 0 10px 0 10px;
+        padding: 15px 15px 20px 15px;
         min-height: auto;
         flex: 0 0 auto;
         justify-content: flex-start;
@@ -763,7 +781,7 @@ body {
     }
 
     .content-side.full-width {
-        padding: 10px 10px 10px 10px;
+        padding: 15px;
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -771,56 +789,58 @@ body {
     }
 
     .building-side {
-        padding: 0 10px 4px 10px;
+        padding: 15px 15px 30px 15px;
         min-height: auto;
-        margin-top: -10px;
+        margin-top: 0;
         border-top: none;
     }
 
     .building-visualization {
-        max-width: 100%;
-        max-width: min(330px, 85vw);
-        margin-top: -10px;
+        max-width: min(280px, 70vw);
+        margin: 0 auto;
+        margin-top: -5px;
     }
     
     #buildingSvg {
         width: 100%;
-        max-width: 330px;
+        max-width: 280px;
         height: auto;
     }
     
     .building-message {
-        margin-top: 5px;
-        min-height: 20px;
+        margin-top: 8px;
+        min-height: 25px;
     }
     
     .building-message p {
-        font-size: 13px;
-        padding: 6px 14px;
+        font-size: 12px;
+        padding: 6px 12px;
     }
 
     .question-number {
-        font-size: 20px;
-        margin-bottom: 10px;
+        font-size: 18px;
+        margin-bottom: 8px;
     }
 
     .question-title {
         font-size: 20px;
-        line-height: 1.3;
+        line-height: 1.4;
+        margin-bottom: 8px;
     }
 
     .question-description {
         font-size: 13px;
-        margin-bottom: 24px;
-        margin-top: 4px;
+        margin-bottom: 16px;
+        margin-top: 6px;
     }
 
     .choices {
         max-width: 100%;
         gap: 8px;
-        max-height: 55vh;
-        margin-top: 10px;
-        margin-bottom: 5px;
+        max-height: calc(100vh - 450px);
+        margin-top: 12px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
     }
 
     .choice {
@@ -844,48 +864,79 @@ body {
     .text-input,
     .textarea-input {
         max-width: 100%;
-        font-size: 18px;
+        font-size: 17px;
         padding: 10px 0;
     }
 
     .textarea-input {
         min-height: 40px;
-        max-height: 40vh;
+        max-height: 30vh;
     }
 
     .input-hint {
         font-size: 12px;
         margin-top: 10px;
     }
+    
+    .textarea-section {
+        margin-top: 20px;
+    }
+    
+    .other-input-container {
+        margin-top: 12px;
+    }
+    
+    .other-text-input {
+        font-size: 16px;
+    }
 }
 
 @media (max-height: 700px) {
     .question-number {
-        font-size: 20px;
-        margin-bottom: 8px;
+        font-size: 17px;
+        margin-bottom: 6px;
     }
 
     .question-title {
-        font-size: 20px;
+        font-size: 18px;
+        margin-bottom: 6px;
     }
 
     .question-description {
-        font-size: 13px;
-        margin-bottom: 20px;
+        font-size: 12px;
+        margin-bottom: 12px;
     }
 
     .choices {
-        gap: 8px;
-        max-height: 45vh;
+        gap: 6px;
+        max-height: calc(100vh - 400px);
+        margin-top: 8px;
     }
 
     .choice {
-        padding: 10px 14px;
+        padding: 10px 12px;
         font-size: 14px;
     }
 
     .textarea-input {
-        max-height: 30vh;
+        max-height: 25vh;
+    }
+    
+    .building-visualization {
+        max-width: min(240px, 60vw);
+        margin-top: -8px;
+    }
+    
+    .building-side {
+        padding: 10px 15px 20px 15px;
+    }
+    
+    .building-intro-message h2 {
+        font-size: 16px;
+    }
+    
+    .building-intro-message p {
+        font-size: 12px;
     }
 }
 
@@ -1209,8 +1260,10 @@ body {
 @media (max-width: 768px) {
     .image-choices {
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        gap: 12px;
         max-width: 100%;
+        margin-top: 16px;
+        margin-bottom: 20px;
     }
     
     .image-choice {
@@ -1222,7 +1275,7 @@ body {
     }
     
     .image-choice img {
-        height: 140px;
+        height: 130px;
     }
 }
 
@@ -1239,67 +1292,45 @@ body {
 
 @media (max-width: 768px) {
     .question.active .intro-title {
-        font-size: 32px !important;
-        margin-bottom: 24px !important;
+        font-size: 28px !important;
+        margin-bottom: 20px !important;
         letter-spacing: -0.5px;
+        line-height: 1.3 !important;
     }
 
     .question.active .intro-content {
-        font-size: 16px;
-        margin-bottom: 32px;
-        max-width: 90%;
+        font-size: 15px;
+        margin-bottom: 28px;
+        max-width: 100%;
         line-height: 1.6;
+        padding: 0 10px;
     }
 
     .intro-content br {
-        margin: 6px 0;
+        margin: 5px 0;
     }
 
     .question.active .intro-button {
         width: auto;
         min-width: 200px;
-        padding: 16px 40px;
-        font-size: 17px;
+        padding: 15px 36px;
+        font-size: 16px;
     }
 
     .content-side.full-width {
         max-width: 100%;
+        padding: 20px 15px !important;
     }
 
     .question[id="question-0"].active {
         max-width: 100%;
-        padding: 0 20px;
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: calc(100% - 40px) !important;
-        height: auto !important;
-        overflow: visible !important;
-        z-index: 100;
-        min-height: auto !important;
-    }
-    
-    /* Zablokovať scroll keď je intro aktívne */
-    body.intro-active {
-        overflow: hidden !important;
-        position: fixed !important;
-        width: 100% !important;
-        height: 100% !important;
-        touch-action: none !important;
-    }
-
-    .scale-options {
-        gap: 8px;
-    }
-
-    .scale-number {
-        padding: 12px;
-        font-size: 18px;
-    }
-
-    .scale-labels {
-        font-size: 12px;
+        padding: 30px 15px 40px 15px;
+        position: relative;
+        min-height: calc(100vh - 60px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -1488,9 +1519,22 @@ body {
 }
 
 @media (max-width: 768px) {
+    .multiple-scale-container {
+        gap: 24px;
+        margin-top: 16px;
+    }
+    
+    .scale-group {
+        gap: 10px;
+    }
+    
+    .scale-question {
+        font-size: 15px;
+    }
+    
     .scale-option {
-        width: 45px;
-        height: 45px;
+        width: 44px;
+        height: 44px;
     }
     
     .scale-number {
@@ -1498,11 +1542,16 @@ body {
     }
     
     .scale-labels {
-        font-size: 12px;
+        font-size: 11px;
+        padding: 0 4px;
     }
     
-    .image-choice img {
-        height: 160px;
+    .scale-container {
+        gap: 10px;
+    }
+    
+    .scale-options {
+        gap: 6px;
     }
 }
 
