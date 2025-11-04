@@ -439,7 +439,7 @@ let answers = {};
 let sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
 // Google Sheets Web App URL
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzBloBKrYbGOl8in1RFv8lHOnCImA1msYyi4KKHgEMq3prwGGW7Ju3fUQeD402U1u6r/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyyEYPHavQbHwmEkBUQBE7h-89Dc8caKooV9A1gQqV9xjXgBRbY_haEK7eVnxXafz_U/exec';
 
 // Build questions array based on role
 function buildQuestionsForRole(role) {
