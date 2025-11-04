@@ -103,12 +103,7 @@ function doPost(e) {
       }
     }
 
-    // 4. PRIPRAVME DÁTA PRE ZÁPIS - musíme vziať len tie odpovede, ktoré patria danej roly
-    // Odpovede v JS sú stále v rovnakom poradí, takže v každom .answers[] sú odpovede pre správne otázky danej roly
-    // Na začiatku dávame Timestamp, sessionId, isComplete, jazyk, ... a za tým odpovede.
-
-    // POZOR: answers môže obsahovať aj intro (N/A), treba to správne zoradiť podľa toho, čo máš nastavené vo formulári, tie config.headers sú zoradené podľa otázok v otázkach pre JS
-
+    // 4. PRIPRAVME DÁTA PRE ZÁPIS
     let rowData = [
       data.timestamp, data.sessionId, data.isComplete ? 'Áno' : 'Nie', data.language || 'sk'
     ];
@@ -118,8 +113,33 @@ function doPost(e) {
       rowData.push(data.answers[i] !== undefined ? data.answers[i] : '');
     }
 
-    Logger.log('Insert row for role ' + role + ': ' + JSON.stringify(rowData));
-    sheet.appendRow(rowData);
+    // 5. KONTROLA - AK UŽ EXISTUJE RIADOK S TÝMTO SESSION ID, AKTUALIZUJEME HO
+    let lastRow = sheet.getLastRow();
+    let rowToUpdate = -1;
+    
+    if (lastRow > 1) {
+      // Session ID je v stĺpci 2 (index 1)
+      const sessionIds = sheet.getRange(2, 2, lastRow - 1, 1).getValues();
+      for (let i = 0; i < sessionIds.length; i++) {
+        if (sessionIds[i][0] === data.sessionId) {
+          rowToUpdate = i + 2; // +2 pretože: array je 0-indexed a riadok 1 je header
+          Logger.log('Found existing session at row: ' + rowToUpdate);
+          break;
+        }
+      }
+    }
+
+    // 6. ZÁPIS - AKTUALIZÁCIA ALEBO VYTVORENIE NOVÉHO RIADKU
+    if (rowToUpdate > 0) {
+      // Aktualizovať existujúci riadok
+      Logger.log('Updating row: ' + rowToUpdate);
+      sheet.getRange(rowToUpdate, 1, 1, rowData.length).setValues([rowData]);
+    } else {
+      // Vytvoriť nový riadok
+      Logger.log('Appending new row');
+      sheet.appendRow(rowData);
+    }
+    
     lock.releaseLock();
     Logger.log('Success!');
 
@@ -166,4 +186,10 @@ function manuallyResetSheets(sheetNames) {
     }
   });
 }
-// Príklad použitia: manuálne v AppsScripte → manuallyResetSheets(['student', 'ucitel', 'rodic']);
+/**
+ * Wrapper funkcia na rýchle vymazanie všetkých odpovedí.
+ * Spustíš cez Apps Script menu → "runResetAllSheets"
+ */
+function runResetAllSheets() {
+  manuallyResetSheets(['student', 'ucitel', 'rodic']);
+}
